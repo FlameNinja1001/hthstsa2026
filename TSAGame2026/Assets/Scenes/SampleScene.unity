@@ -397,7 +397,7 @@ GameObject:
   - component: {fileID: 544905381}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 1934949750}
   - component: {fileID: 1934949749}
   - component: {fileID: 1934949748}
+  - component: {fileID: 1934949753}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -590,7 +591,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &1934949749
 CapsuleCollider:
@@ -687,6 +688,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1934949753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934949747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abf27bd49018470baa1be2726094a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  move: {x: 0, y: 0}
+  rb: {fileID: 0}
+  jump: 0
+  moveLeftRightSpeed: 3
+  rayLength: 1
+  isGrounded: 0
+  jumpForce: 7
+  gravity: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
