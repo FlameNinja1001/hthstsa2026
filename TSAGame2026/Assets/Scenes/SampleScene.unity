@@ -181,7 +181,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1180,11 +1180,18 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   rb: {fileID: 0}
   jump: 0
+  dash: 0
   moveLeftRightSpeed: 3
   rayLength: 1.2
   isGrounded: 0
   jumpForce: 10
   gravity: 10
+  canJump: 1
+  canDash: 1
+  dashSpeed: 10
+  moveDirection: 1
+  isDashing: 0
+  dashDuration: 0.25
 --- !u!1 &1939740201
 GameObject:
   m_ObjectHideFlags: 0
