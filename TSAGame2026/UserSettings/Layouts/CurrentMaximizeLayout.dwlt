@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 17435
+  controlID: 27977
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 17436
+  controlID: 27978
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 56}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 17437
+  controlID: 27979
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -249,9 +249,10 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: 45704
       m_LastClickedID:
-        m_Data: 0
+        m_Data: 45704
       m_ExpandedIDs:
       - m_Data: -1292
       m_RenameOverlay:
@@ -271,7 +272,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 5}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -888,9 +889,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -0.3739077, y: 3.4079213, z: 1.4258883}
+    m_Target: {x: 1.2394174, y: 1.2338958, z: 2.0511668}
     speed: 2
-    m_Value: {x: -0.3739077, y: 3.4079213, z: 1.4258883}
+    m_Value: {x: 1.2394174, y: 1.2338958, z: 2.0511668}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -936,13 +937,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.078806214, y: 0.086926356, z: 0.0068982034, w: 0.9930695}
+    m_Target: {x: -0.23063248, y: -0.11182213, z: 0.026691293, w: -0.96622646}
     speed: 2
-    m_Value: {x: 0.078806214, y: -0.086926356, z: -0.0068982034, w: -0.9930696}
+    m_Value: {x: -0.2306721, y: -0.11037258, z: 0.026345296, w: -0.9663924}
   m_Size:
-    m_Target: 1.5033085
+    m_Target: 3.3247583
     speed: 2
-    m_Value: 1.5033085
+    m_Value: 3.3247583
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1923,7 +1924,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -1932,14 +1933,14 @@ MonoBehaviour:
     y: 452
     width: 1006.5
     height: 424
-  m_MinSize: {x: 231, y: 276}
-  m_MaxSize: {x: 10001, y: 10026}
-  m_ActualView: {fileID: 13}
+  m_MinSize: {x: 101, y: 126}
+  m_MaxSize: {x: 4001, y: 4026}
+  m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 13}
   - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1989,7 +1990,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1999,18 +2000,18 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/Materials
+  - Assets/Scripts
   m_LastFoldersGridSize: 96
   m_LastProjectPath: /Users/samvi/Desktop/Projects/GameDev/TSA2026/hthstsa2026/TSAGame2026
   m_LockTracker:
     m_IsLocked: 0
   m_LastLocalAssetsSearchArea: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 5.000061}
+    scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 46198
+    - m_Data: 46202
     m_LastClickedID:
-      m_Data: 46198
+      m_Data: 46202
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 45896
@@ -2037,7 +2038,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 12}
+      m_ClientGUIView: {fileID: 0}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -2085,8 +2086,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 45704
+    m_LastClickedInstanceID: 45704
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
