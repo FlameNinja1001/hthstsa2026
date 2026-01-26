@@ -81,7 +81,14 @@ public class ProjectileScript : MonoBehaviour
             currentShots +=1;
             GameObject bullet = Instantiate(activeWeapon, new Vector3(transform.position.x + (currentDistance * moveDirection), transform.position.y, transform.position.z), activeWeapon.transform.rotation);
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            rb.linearVelocity = Vector3.right * moveDirection * launchSpeed;
+            if (activeWeaponString != "Javelin" && activeWeaponString != "Bone")
+            {
+                rb.linearVelocity = Vector3.right * moveDirection * launchSpeed;
+            }
+            else if (activeWeaponString == "Javelin")
+            {
+                rb.linearVelocity = new Vector3(moveDirection * launchSpeed, launchSpeed / 2.5f, rb.linearVelocity.z);                
+            }
             canShoot = false;
         }
 

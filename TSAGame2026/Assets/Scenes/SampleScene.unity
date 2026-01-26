@@ -1119,7 +1119,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ca2ccb71355484010acd73dc88e07f09, type: 2}
+  - {fileID: 2100000, guid: 7e25b4098a1754f5ba97ad21f42691bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1211,7 +1211,7 @@ MonoBehaviour:
   bowAndArrowPrefab: {fileID: 5000680881184699824, guid: 5eef143f95361445d89dabcab804f7c4, type: 3}
   musketPrefab: {fileID: 4375512784739598372, guid: 0f695829db700456ca7c7472d308830d, type: 3}
   gearPrefab: {fileID: 5064512641581828850, guid: 13f31a614f4c94b04b49491586079a30, type: 3}
-  activeWeaponString: Gear
+  activeWeaponString: Javelin
   activeWeapon: {fileID: 0}
   shootButton: 0
   ammoCount: 1
@@ -1221,7 +1221,7 @@ MonoBehaviour:
   moveDirection: 1
   launchSpeedSlingshot: 8
   launchSpeedBone: 8
-  launchSpeedJavelin: 16
+  launchSpeedJavelin: 12
   launchSpeedBow: 20
   launchSpeedMusket: 20
   launchSpeedGear: 14.5
