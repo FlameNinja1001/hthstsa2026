@@ -39,6 +39,10 @@ public class ControlScript : MonoBehaviour
         {            
             rb.linearVelocity = new Vector3(rb.linearVelocity.x,jumpForce,rb.linearVelocity.z);
         }
+        if (!jump && rb.linearVelocity.y > 0)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x,0f,rb.linearVelocity.z);
+        }
     
         Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
 
