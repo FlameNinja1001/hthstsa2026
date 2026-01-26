@@ -1211,7 +1211,7 @@ MonoBehaviour:
   bowAndArrowPrefab: {fileID: 5000680881184699824, guid: 5eef143f95361445d89dabcab804f7c4, type: 3}
   musketPrefab: {fileID: 4375512784739598372, guid: 0f695829db700456ca7c7472d308830d, type: 3}
   gearPrefab: {fileID: 5064512641581828850, guid: 13f31a614f4c94b04b49491586079a30, type: 3}
-  activeWeaponString: Gear
+  activeWeaponString: BowAndArrow
   activeWeapon: {fileID: 0}
   shootButton: 0
   ammoCount: 1
@@ -1221,10 +1221,10 @@ MonoBehaviour:
   moveDirection: 1
   launchSpeedSlingshot: 8
   launchSpeedBone: 8
-  launchSpeedJavelin: 16
-  launchSpeedBow: 20
-  launchSpeedMusket: 20
-  launchSpeedGear: 14.5
+  launchSpeedJavelin: 24
+  launchSpeedBow: 24
+  launchSpeedMusket: 24
+  launchSpeedGear: 16
   currentDistance: 0
   slingShotDistance: 1
   boneDistance: 1
