@@ -31,6 +31,9 @@ public class ControlScript : MonoBehaviour
     public bool canDoubleJump = false;
     public bool hasDoubleJumped = false;
 
+    // Wall jump + double jump tracking
+    public bool hasUsedWallJumpDouble = false;
+
     public bool isRaycastHittingWall = false;
     public bool isWallSliding = false;
 
@@ -38,6 +41,12 @@ public class ControlScript : MonoBehaviour
     public float wallJumpPushVertical;
     public float wallJumpDuration = 1f;
     public bool isWallJumping = false;
+    public bool canWallJump = false;
+
+    // Track jump release to prevent auto-double jump
+    public bool jumpReleased = true;
+    public bool animBool;
+    public float doubleJumpAnim = 0.5f;
 
     void Awake()
     {
@@ -53,10 +62,22 @@ public class ControlScript : MonoBehaviour
     void OnDisable()
     {
         input.Player.Disable();
-    }
+    }    
 
     void FixedUpdate()
     {        
+        // Read input
+        jump = input.Player.Jump.IsPressed();
+        move = input.Player.Move.ReadValue<Vector2>();
+        dash = input.Player.Dash.IsPressed();
+
+        // Track jump release
+        if (!jump)
+            jumpReleased = true;
+
+        if (isWallSliding && !jump)
+            canWallJump = true;
+
         if (isRaycastHittingWall && move.x != 0 && !isGrounded && (!jump || rb.linearVelocity.y <= 0))
         {
             isWallSliding = true;
@@ -66,71 +87,79 @@ public class ControlScript : MonoBehaviour
         {
             isWallSliding = false;
         }
+
         if (isWallSliding)
         {
             gravity = 0f;
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x,-slideGravity,rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, -slideGravity, rb.linearVelocity.z);
         }
         else
         {
             gravity = normalGravity;
         }
-        if (canDoubleJump && jump && !hasDoubleJumped)
+
+        // Double jump logic (requires jumpReleased)
+        if (canDoubleJump && jump && jumpReleased && !hasDoubleJumped && !isWallJumping)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x,jumpForce,rb.linearVelocity.z);
+            StartCoroutine(AnimBoolRoutine());
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
             hasDoubleJumped = true;
+            hasUsedWallJumpDouble = true;
+            jumpReleased = false; // must release to jump again
         }
+
         if (move.x > 0)
-        {
             moveDirection = 1;
-        }
         else if (move.x < 0)
-        {
             moveDirection = -1;
-        }
+
         if (!jump)
-        {
             canJump = true;
-        }
+
         rb.linearVelocity += Vector3.down * gravity * Time.fixedDeltaTime;
-        if (isGrounded && jump && canJump)
+
+        if (isGrounded && jump && canJump && !isWallJumping)
         {
             canJump = false;            
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x,jumpForce,rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpForce, rb.linearVelocity.z);
         }
-        else if (!jump)
+        else if (!jump && !isWallSliding && !hasUsedWallJumpDouble)
         {
             canDoubleJump = true;
         }
-        if (!jump && rb.linearVelocity.y > 0)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x,0f,rb.linearVelocity.z);
-            canDoubleJump = true;
-        }
-    
-        Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
 
+        if (!jump && rb.linearVelocity.y > 0 && !isWallJumping && !isWallSliding)
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+            if (!hasUsedWallJumpDouble)
+                canDoubleJump = true;
+        }
+
+        Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
         Debug.DrawRay(transform.position, ((moveDirection > 0) ? Vector3.right : Vector3.left) * sideRayLength, Color.red);
 
         if (dash && canDash && !isDashing)
         {
             canDash = false;
-            rb.linearVelocity = new Vector3(0f,rb.linearVelocity.y,rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, rb.linearVelocity.z);
             StartCoroutine(DashCoroutine());          
         }
+
         if (!dash)
-        {
             canDash = true;
-        }
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
         {
-            
             if (hit.collider.CompareTag("Ground"))
             {
                 isGrounded = true;
                 canDoubleJump = false;
                 hasDoubleJumped = false;
+
+                // Reset everything on ground
+                hasUsedWallJumpDouble = false;
+                jumpReleased = true;
             }
             else
             {
@@ -145,67 +174,71 @@ public class ControlScript : MonoBehaviour
         RaycastHit hit2;
         if (Physics.Raycast(transform.position, (moveDirection > 0) ? Vector3.right : Vector3.left, out hit2, sideRayLength))
         {
-            
             if (hit2.collider.CompareTag("Ground"))
-            {
                 isRaycastHittingWall = true;
-            }
             else
-            {
                 isRaycastHittingWall = false;
-            }
         }
         else
-        {
-            isRaycastHittingWall = false;
-        }       
+            isRaycastHittingWall = false;       
 
-        jump = input.Player.Jump.IsPressed();
-        move = input.Player.Move.ReadValue<Vector2>();
-        dash = input.Player.Dash.IsPressed();
         if (!isDashing && !isWallJumping)
-        {
-            rb.linearVelocity = new Vector3(move.x * moveLeftRightSpeed, rb.linearVelocity.y,rb.linearVelocity.z);
-        }
-        if (jump && isWallSliding)
-        {
+            rb.linearVelocity = new Vector3(move.x * moveLeftRightSpeed, rb.linearVelocity.y, rb.linearVelocity.z);
+
+        if (jump && isWallSliding && canWallJump)
             StartCoroutine(WallJumpCoroutine());
-        }
     }
 
     public IEnumerator DashCoroutine()
     {
         float timer = 0;
         isDashing = true;
+
         while (timer < dashDuration)
         {
-            rb.linearVelocity = new Vector3(dashSpeed * moveDirection,rb.linearVelocity.y,rb.linearVelocity.z);
+            rb.linearVelocity = new Vector3(dashSpeed * moveDirection, rb.linearVelocity.y, rb.linearVelocity.z);
             timer += Time.deltaTime;
             yield return null;
         }
+
         isDashing = false;
-        rb.linearVelocity = new Vector3(0f,rb.linearVelocity.y,rb.linearVelocity.z);
+        rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, rb.linearVelocity.z);
     }
 
     public IEnumerator WallJumpCoroutine()
     {
         float timer = 0;
         isWallJumping = true;
+        canJump = false;
+
         int initialMoveDir = moveDirection;
-        
-        // Apply the jump force ONCE
+
+        // ⭐ Reset jumpReleased to require release after wall jump
+        jumpReleased = false;
+
         rb.linearVelocity = new Vector3(wallJumpPushHoriz * -initialMoveDir, wallJumpPushVertical, rb.linearVelocity.z);
-        
+
+        // Only allow double jump ONCE until grounded
+        if (!hasUsedWallJumpDouble)
+        {
+            canDoubleJump = true;
+            hasDoubleJumped = false;
+        }
+
         while (timer < wallJumpDuration)
         {
-            // Only control horizontal movement during wall jump
             rb.linearVelocity = new Vector3(wallJumpPushHoriz * -initialMoveDir, rb.linearVelocity.y, rb.linearVelocity.z);
             timer += Time.deltaTime;
             yield return null;
         }
-        isWallJumping = false;
-        hasDoubleJumped = false;
-        canDoubleJump = true;
-    }
 
+        isWallJumping = false;    
+        canWallJump = false;            
+    }
+    public IEnumerator AnimBoolRoutine()
+    {
+        animBool = true;
+        yield return new WaitForSeconds(doubleJumpAnim);
+        animBool = false;
+    }
 }
