@@ -4,6 +4,7 @@ public class PlayerAnims : MonoBehaviour
 {
     public Animator animator;
     public ControlScript controlScript;
+    public ProjectileScript projectileScript;
     public GameObject targetObject;
 
     private float ogScale;
@@ -49,5 +50,6 @@ public class PlayerAnims : MonoBehaviour
         animator.SetBool("IsWallJumping", controlScript.isWallJumping);
         animator.SetBool("IsRunning", controlScript.move.x != 0);
         animator.SetBool("IsDashing", controlScript.isDashing);
+        animator.SetBool("IsShooting", projectileScript.isShootAnimBoolActive);
     }
 }

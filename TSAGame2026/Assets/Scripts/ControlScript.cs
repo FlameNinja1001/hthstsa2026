@@ -48,6 +48,8 @@ public class ControlScript : MonoBehaviour
     public bool animBool;
     public float doubleJumpAnim = 0.5f;
 
+    public bool hasAirDashed = false;
+
     void Awake()
     {
         input = new PlayerInputActions();
@@ -70,6 +72,11 @@ public class ControlScript : MonoBehaviour
         jump = input.Player.Jump.IsPressed();
         move = input.Player.Move.ReadValue<Vector2>();
         dash = input.Player.Dash.IsPressed();
+
+        if (isGrounded)
+        {
+            hasAirDashed = false;
+        }
 
         // Track jump release
         if (!jump)
@@ -138,7 +145,7 @@ public class ControlScript : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
         Debug.DrawRay(transform.position, ((moveDirection > 0) ? Vector3.right : Vector3.left) * sideRayLength, Color.red);
 
-        if (dash && canDash && !isDashing)
+        if (dash && canDash && !isDashing && !hasAirDashed)
         {
             canDash = false;
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, rb.linearVelocity.z);
@@ -192,8 +199,7 @@ public class ControlScript : MonoBehaviour
     public IEnumerator DashCoroutine()
     {
         float timer = 0;
-        isDashing = true;
-
+        isDashing = true;        
         while (timer < dashDuration)
         {
             rb.linearVelocity = new Vector3(dashSpeed * moveDirection, rb.linearVelocity.y, rb.linearVelocity.z);
@@ -203,6 +209,10 @@ public class ControlScript : MonoBehaviour
 
         isDashing = false;
         rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, rb.linearVelocity.z);
+        if (!isGrounded)
+        {
+            hasAirDashed = true;
+        }
     }
 
     public IEnumerator WallJumpCoroutine()

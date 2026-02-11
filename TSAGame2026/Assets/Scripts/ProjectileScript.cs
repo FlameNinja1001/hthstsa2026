@@ -38,6 +38,7 @@ public class ProjectileScript : MonoBehaviour
     public float bowDistance;
     public float musketDistance;
     public float gearDistance;
+    public bool isShootAnimBoolActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -80,6 +81,7 @@ public class ProjectileScript : MonoBehaviour
         {
             currentShots +=1;
             GameObject bullet = Instantiate(activeWeapon, new Vector3(transform.position.x + (currentDistance * moveDirection), transform.position.y, transform.position.z), activeWeapon.transform.rotation);
+            StartCoroutine(ShootAnimCoroutine());
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (activeWeaponString != "Javelin" && activeWeaponString != "Bone")
             {
@@ -139,5 +141,11 @@ public class ProjectileScript : MonoBehaviour
     public void UpdateAmmoMax()
     {
         
+    }
+    public IEnumerator ShootAnimCoroutine()
+    {
+        isShootAnimBoolActive = true;
+        yield return new WaitForSeconds(0.5f);
+        isShootAnimBoolActive = false;
     }
 }
