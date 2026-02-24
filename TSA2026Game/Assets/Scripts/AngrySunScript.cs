@@ -26,6 +26,10 @@ public class AngrySunScript : MonoBehaviour
     public float standStillDelay;
     public float rotatingDelay;
 
+    public GameObject player;
+    public Vector3 playerPos;
+    public float sweepArc;    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +42,13 @@ public class AngrySunScript : MonoBehaviour
 
     void Update()
     {
+        sweepArc = Mathf.Clamp((cameraPos.position.y - playerPos.y) / 4f, 0.1f, 1f);
+
+        // Normalize 0.1 → 1 into 0 → 1
+        float t = Mathf.InverseLerp(0.1f, 1f, sweepArc);
+
+        // Flip and remap to 10 → 1
+        sweepArc = Mathf.Lerp(10f, 1f, t);
         timer += Time.deltaTime;
         if (timer >= currentDelay)
         {
@@ -71,7 +82,7 @@ public class AngrySunScript : MonoBehaviour
             Vector3 sunset = new Vector3(cameraPos.position.x - (isLeft ? -offsetSide : offsetSide), cameraPos.position.y + offsetUp, transform.position.z);
             Vector3 center = (sunrise + sunset) * 0.5F;
             
-            center += new Vector3(0, 1, 0);
+            center += new Vector3(0, sweepArc, 0);
             
             Vector3 riseRelCenter = sunrise - center;
             Vector3 setRelCenter = sunset - center;
@@ -88,6 +99,7 @@ public class AngrySunScript : MonoBehaviour
 
     void SwitchState()
     {
+        playerPos = player.transform.position;
         if (stateString == "StandStill")
         {        
             stateString = "Rotating";
