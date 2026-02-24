@@ -43,7 +43,8 @@ public class PlayerAnims : MonoBehaviour
             );
         }
 
-        // Animator bools
+        // Animator bools!
+        anim.SetInteger("StatusOfWeapon", projectileScript.ammoCount - 1);
         animator.SetBool("IsGrounded", controlScript.isGrounded);
         animator.SetBool("IsDoubleJumping", controlScript.animBool);
         animator.SetBool("IsWallSliding", controlScript.isWallSliding);
