@@ -214,5 +214,5 @@ MonoBehaviour:
   posUp: {fileID: 0}
   posDown: {fileID: 0}
   canCrush: 1
-  distanceThreshold: 2
+  distanceThreshold: 1
   distance: 0
