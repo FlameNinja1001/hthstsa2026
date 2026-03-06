@@ -15,6 +15,11 @@ public class MeleeDamage : MonoBehaviour
             {
                 enemyHealth.TakeDamage(damageAmount);
             }            
+            GilgameshBossScript gilgameshBossScript = other.GetComponent<GilgameshBossScript>();
+            if (gilgameshBossScript != null)
+            {
+                gilgameshBossScript.Jump();
+            }  
         }
     }
 }
