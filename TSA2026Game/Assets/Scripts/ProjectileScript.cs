@@ -94,7 +94,8 @@ public class ProjectileScript : MonoBehaviour
             }
             else if (activeWeaponString == "Javelin")
             {
-                rb.velocity = new Vector3(moveDirection * launchSpeed, launchSpeed / 2.5f, rb.velocity.z);                
+                rb.velocity = new Vector3(moveDirection * launchSpeed, launchSpeed / 2.5f, rb.velocity.z);             
+                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x,bullet.transform.localScale.y * moveDirection,bullet.transform.localScale.z);   
             }
             canShoot = false;
         }

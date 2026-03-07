@@ -51,8 +51,13 @@ public class PlayerHealth : MonoBehaviour
         {            
             if (canBeDamaged)
             {
+                if (collision.gameObject.GetComponent<BatBehavior>() != null)
+                {
+                    BatBehavior batBehavior = collision.gameObject.GetComponent<BatBehavior>();
+                    StartCoroutine(batBehavior.SetTarget(batBehavior.hidePos));
+                }
                 health -= 1;
-                StartCoroutine(DamagePlayer());
+                StartCoroutine(DamagePlayer());                
             }
         }
     }
