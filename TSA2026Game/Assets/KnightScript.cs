@@ -15,6 +15,8 @@ public class KnightScript : MonoBehaviour
     public GameObject damageHitbox;
     public float distanceThresholdPlayer;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class KnightScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {      
+        animator.SetBool("IsSlashing",damageHitbox.activeSelf);
         if (Vector3.Distance(playerPos.position,transform.position) < distanceThresholdPlayer)
         {
             damageHitbox.SetActive(true);
