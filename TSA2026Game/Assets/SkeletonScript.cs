@@ -17,16 +17,23 @@ public class SkeletonScript : MonoBehaviour
     public float leapSpeed;
     public float jumpTimer;
     public float actualJumpDuration;
+
+    public Transform mesh;
+    public Animator animator;
+
+    public float ogScaleX;
     // Start is called before the first frame update
     void Start()
     {
+        ogScaleX = mesh.localScale.x;
         rb = GetComponent<Rigidbody>();
         currentState = "Walking";
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {
+    {        
+        animator.SetBool("IsGrounded",isGrounded);
         if (currentState == "Jumping")
         {            
             jumpTimer += Time.deltaTime;
@@ -45,14 +52,21 @@ public class SkeletonScript : MonoBehaviour
         }
         if (isGrounded)
         {
+            mesh.localRotation = Quaternion.Euler(0,0,0);
             if (player.position.x >= transform.position.x)
             {
                 moveDirection = 1;
+                mesh.localScale = new Vector3(ogScaleX, mesh.localScale.y,mesh.localScale.z);
             }
             else
             {
                 moveDirection = -1;
+                mesh.localScale = new Vector3(-ogScaleX, mesh.localScale.y,mesh.localScale.z);
             }
+        }
+        else
+        {
+            mesh.localRotation = Quaternion.Euler(0,45 * -moveDirection,0);
         }
         
         if (currentState == "Walking" && isGrounded)

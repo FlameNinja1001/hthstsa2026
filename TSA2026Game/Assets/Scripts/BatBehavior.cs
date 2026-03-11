@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BatBehavior : MonoBehaviour
 {
+    public Animator animator;
     public Transform hidePos;
     public Transform playerTransform;
     public float distanceThreshold;
@@ -26,6 +27,11 @@ public class BatBehavior : MonoBehaviour
         if (Vector3.Distance(transform.position, hidePos.position) < 0.1)
         {
             canSet = true;
+            animator.SetBool("IsChasing",false);
+        }
+        else
+        {
+            animator.SetBool("IsChasing",true);
         }
         transform.position = Vector3.MoveTowards(transform.position, target.position, currentSpeed * Time.deltaTime); 
         if (target == hidePos)

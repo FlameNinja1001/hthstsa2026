@@ -14,7 +14,11 @@ public class ProjectileDamage : MonoBehaviour
         {            
             Destroy(gameObject);
         }
-        if (other.GetComponent<EnemyHealth>() != null)
+        if (other.gameObject.CompareTag("Shield"))
+        {            
+            Destroy(gameObject);
+        }
+        else if (other.GetComponent<EnemyHealth>() != null)
         {            
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
