@@ -120,7 +120,7 @@ MonoBehaviour:
   stateString: StandStill
   timer: 0
   currentDelay: 0
-  standStillDelay: 2.5
+  standStillDelay: 2.75
   rotatingDelay: 1
   player: {fileID: 0}
   playerPos: {x: 0, y: 0, z: 0}
