@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  timeDown: 1
+  timeDown: 1.2
   timeUp: 5
   posUp: {fileID: 0}
   posDown: {fileID: 0}

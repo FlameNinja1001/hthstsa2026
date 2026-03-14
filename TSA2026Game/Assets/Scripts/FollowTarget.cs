@@ -17,12 +17,32 @@ public class FollowTarget : MonoBehaviour
 
     float lastTargetX;
 
+    // BOSS MODE
+    public bool isBoss;
+
+    public float bossX1;
+    public float bossX2;
+    public float bossMoveSpeed = 4f;
+
+    bool bossAtPos1 = true;
+
     void Start()
     {
         lastTargetX = target.position.x;
     }
 
     void Update()
+    {
+        if (isBoss)
+        {
+            BossCamera();
+            return;
+        }
+
+        NormalCamera();
+    }
+
+    void NormalCamera()
     {
         Vector3 camPos = transform.position;
         Vector3 targetPos = target.position;
@@ -63,5 +83,19 @@ public class FollowTarget : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetCameraPos, smoothSpeed * Time.deltaTime);
 
         lastTargetX = target.position.x;
+    }
+
+    void BossCamera()
+    {
+        float targetX = bossAtPos1 ? bossX1 : bossX2;
+
+        Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
+
+        transform.position = Vector3.Lerp(transform.position, targetPos, bossMoveSpeed * Time.deltaTime);
+    }
+
+    public void SwitchBossPos()
+    {
+        bossAtPos1 = !bossAtPos1;
     }
 }

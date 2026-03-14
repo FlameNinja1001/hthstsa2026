@@ -71,7 +71,12 @@ public class ControlScript : MonoBehaviour
     }    
 
     void FixedUpdate()
-    {            
+    {           
+        if (!BossRoomScript.canPlayerMove)
+        {
+            rb.velocity = new Vector3(0,0,0);
+            return;
+        }
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();        
         if (playerHealth.canBeDamaged)
         {

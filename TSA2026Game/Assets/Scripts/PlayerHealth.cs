@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         if (health <= 0)
-        {
+        {            
             Instantiate(deathPrefab, new Vector3(transform.position.x,transform.position.y,deathPrefab.transform.position.z), deathPrefab.transform.rotation);
             Destroy(gameObject);
         }

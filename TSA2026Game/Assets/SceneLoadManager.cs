@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    public GameObject sunObj;
     public Transform[]checkPointGoals;
 
     public Transform[]checkPointCameraGoals;
-    public int lives = 3; 
-    public int checkpointSpawn = 0;   
+    public static int lives = 3; 
+    public static int checkpointSpawn = 0;   
 
     public float delayTimer;  
     public float deathDelay;  
@@ -18,13 +19,42 @@ public class SceneLoadManager : MonoBehaviour
     public GameObject inScene;
     public GameObject outScene;  
     public Transform player;
-    public Transform camera;
+    public Transform camera;    
+    bool hasCalled = false;
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         StartCoroutine(IntroCoroutine());
         player.position = checkPointGoals[checkpointSpawn].position;
         camera.position = checkPointCameraGoals[checkpointSpawn].position;
+    }
+
+    void Update()
+    {
+        Debug.Log("Lives" + lives);
+        FollowTarget followTarget = FindObjectOfType<FollowTarget>();  
+        if (player == null && !hasCalled)
+        {
+            StartCoroutine(Death());
+
+            hasCalled = true;
+        }        
+        if (checkpointSpawn >= 2)
+        {            
+            followTarget.isBoss = true;      
+        }
+        else
+        {
+            followTarget.isBoss = false;      
+        }
+        if (checkpointSpawn == 0)
+        {
+            sunObj.SetActive(true);
+        }
+        else
+        {
+            sunObj.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -61,6 +91,8 @@ public class SceneLoadManager : MonoBehaviour
     {
         yield return new WaitForSeconds(deathDelay);
         StartCoroutine(OutroCoroutine(false));
+        yield return new WaitForSeconds(delayTimer);
+        yield return new WaitForSeconds(deathDelay); 
         lives-=1;
         if (lives > 0)
         {

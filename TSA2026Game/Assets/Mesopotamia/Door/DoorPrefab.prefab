@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2618669842767912992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.9830008, y: 0, z: 0}
+  m_LocalPosition: {x: 3.8, y: 0, z: 0}
   m_LocalScale: {x: 3.8220997, y: 156.48851, z: 5.7515}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d2adc8505d24ef9869906f4f165f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 3
   heartObj: {fileID: 3407595816476754137, guid: db92e33b66008482ca0fd31343f879c1,
     type: 3}
   chance: 110

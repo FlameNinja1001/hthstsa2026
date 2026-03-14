@@ -115,7 +115,7 @@ MonoBehaviour:
   finalPos: {x: 0, y: 0, z: 0}
   moveDist: 5
   speed: 15
-  waitDuration: 3
+  waitDuration: 1.5
   targetPos: {x: 0, y: 0, z: 0}
 --- !u!1001 &3860524168317608658
 PrefabInstance:
