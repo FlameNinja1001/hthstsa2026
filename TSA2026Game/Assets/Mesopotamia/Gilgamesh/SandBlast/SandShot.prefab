@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLeft: 0
-  xSpeed: 0.35
+  xSpeed: 10
   mesh: {fileID: 3158753867725595976}
   bounceHeight: 0
   bounceSpeed: 0

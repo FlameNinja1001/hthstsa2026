@@ -139,7 +139,7 @@ MonoBehaviour:
   lionSpawnRight: {fileID: 0}
   delayForShots1: 2
   delayForShots2: 2.5
-  delayForShots3: 4.5
+  delayForShots3: 4.75
   hasShot1: 0
   hasShot2: 0
 --- !u!114 &7884513590947811406

@@ -19,15 +19,20 @@ public class SceneLoadManager : MonoBehaviour
     public GameObject inScene;
     public GameObject outScene;  
     public Transform player;
+    public Transform boss;
     public Transform camera;    
     bool hasCalled = false;
+    public AudioSource audio;
+    public AudioClip song;
+    public float introVictDuration;
+    public float victoryDuration;
     // Start is called before the first frame update
     void Start()
     {        
         StartCoroutine(IntroCoroutine());
         player.position = checkPointGoals[checkpointSpawn].position;
         camera.position = checkPointCameraGoals[checkpointSpawn].position;
-    }
+    }    
 
     void Update()
     {
@@ -38,6 +43,13 @@ public class SceneLoadManager : MonoBehaviour
             StartCoroutine(Death());
 
             hasCalled = true;
+        } 
+        if (boss == null && !hasCalled)
+        {
+            StartCoroutine(Victory());
+
+            hasCalled = true;
+            
         }        
         if (checkpointSpawn >= 2)
         {            
@@ -89,6 +101,7 @@ public class SceneLoadManager : MonoBehaviour
 
     public IEnumerator Death()
     {
+        audio.Stop();
         yield return new WaitForSeconds(deathDelay);
         StartCoroutine(OutroCoroutine(false));
         yield return new WaitForSeconds(delayTimer);
@@ -98,6 +111,28 @@ public class SceneLoadManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }                
+        else
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+    }
+    public IEnumerator Victory()
+    {
+        BossRoomScript.canPlayerMove = false;
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();  
+        playerHealth.canBeDamaged = false;
+        audio.Stop();
+        yield return new WaitForSeconds(introVictDuration);
+        audio.clip = song;
+        // Play the new clip
+        audio.Play();
+        yield return new WaitForSeconds(victoryDuration);
+        audio.Stop();
+
+        yield return new WaitForSeconds(deathDelay);
+        StartCoroutine(OutroCoroutine(false));
+        yield return new WaitForSeconds(delayTimer);
+        yield return new WaitForSeconds(deathDelay);               
     }
     
 }

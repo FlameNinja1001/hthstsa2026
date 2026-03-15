@@ -37,7 +37,7 @@ public class SandLionScript : MonoBehaviour
             mesh.transform.localScale = new Vector3(initialScale,mesh.transform.localScale.y,mesh.transform.localScale.z);
         }    
         transform.position = new Vector3(
-            transform.position.x + (isLeft ? -xSpeed : +xSpeed),
+            transform.position.x + (isLeft ? -xSpeed : xSpeed) * Time.deltaTime,
             startY + yOffset,
             transform.position.z
         );

@@ -5757,7 +5757,7 @@ GameObject:
   - component: {fileID: 810127964}
   - component: {fileID: 810127963}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5789,7 +5789,12 @@ MonoBehaviour:
   inScene: {fileID: 1848003142}
   outScene: {fileID: 1166900179}
   player: {fileID: 1370322296}
+  boss: {fileID: 2117474556}
   camera: {fileID: 1590849989026322230}
+  audio: {fileID: 1710227398}
+  song: {fileID: 8300000, guid: d26ef7a93d8f2478c854366ded0eb41a, type: 3}
+  introVictDuration: 0.25
+  victoryDuration: 1
 --- !u!4 &810127964
 Transform:
   m_ObjectHideFlags: 0
@@ -14511,6 +14516,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2117474556 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7884513590947811397, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7884513591820399757}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2118598883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15062,6 +15073,7 @@ MonoBehaviour:
   bossX1: -289.3
   bossX2: -255.65
   bossMoveSpeed: 4
+  loadStringCopy: Mesopotamia
 --- !u!1001 &2007328335919193745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16051,7 +16063,7 @@ PrefabInstance:
     - target: {fileID: 7884513590947811397, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1183.0054
+      value: -1183.21
       objectReference: {fileID: 0}
     - target: {fileID: 7884513590947811397, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
         type: 3}

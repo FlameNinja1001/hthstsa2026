@@ -25,9 +25,11 @@ public class FollowTarget : MonoBehaviour
     public float bossMoveSpeed = 4f;
 
     bool bossAtPos1 = true;
+    public string loadStringCopy;
 
     void Start()
     {
+        GameOverScript.loadString = loadStringCopy;
         lastTargetX = target.position.x;
     }
 
