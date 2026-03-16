@@ -10,7 +10,9 @@ public class SimpleEnemyScript : MonoBehaviour
     public float speed = 5.0f;
     public float distance = 1.0f;
     public Transform model;
-    public float initialXScaleMesh;    
+    public float initialXScaleMesh;   
+
+    public bool isBird = false; 
     // Start is called before the first frame update
     void Start()
     {
@@ -20,17 +22,20 @@ public class SimpleEnemyScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {      
-        if (targetTransform == goal1)
-        {            
-            model.localRotation = Quaternion.Euler(0,-90,0);
-            model.localScale = new Vector3(-initialXScaleMesh, model.localScale.y, model.localScale.z);    
-        }
-        else
+    {  
+        if (!isBird)
         {
-            model.localRotation = Quaternion.Euler(0,90,0);
-            model.localScale = new Vector3(initialXScaleMesh, model.localScale.y,  model.localScale.z);    
-        }  
+            if (targetTransform == goal1)
+            {            
+                model.localRotation = Quaternion.Euler(0,-90,0);
+                model.localScale = new Vector3(-initialXScaleMesh, model.localScale.y, model.localScale.z);    
+            }
+            else
+            {
+                model.localRotation = Quaternion.Euler(0,90,0);
+                model.localScale = new Vector3(initialXScaleMesh, model.localScale.y,  model.localScale.z);    
+            }  
+        }        
         if (Vector3.Distance(transform.position,targetTransform.position) < distance)
         {
             if (targetTransform == goal1)

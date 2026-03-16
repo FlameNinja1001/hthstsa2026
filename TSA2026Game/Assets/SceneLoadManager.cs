@@ -26,6 +26,7 @@ public class SceneLoadManager : MonoBehaviour
     public AudioClip song;
     public float introVictDuration;
     public float victoryDuration;
+    public bool isTutorial = false;
     // Start is called before the first frame update
     void Start()
     {        
@@ -55,7 +56,7 @@ public class SceneLoadManager : MonoBehaviour
         {            
             followTarget.isBoss = true;      
         }
-        else
+        else if (!isTutorial)
         {
             followTarget.isBoss = false;      
         }

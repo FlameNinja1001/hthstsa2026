@@ -26,6 +26,9 @@ public class FollowTarget : MonoBehaviour
 
     bool bossAtPos1 = true;
     public string loadStringCopy;
+    public bool isY = false;
+    public float bossY1;
+    public float bossY2;
 
     void Start()
     {
@@ -90,8 +93,14 @@ public class FollowTarget : MonoBehaviour
     void BossCamera()
     {
         float targetX = bossAtPos1 ? bossX1 : bossX2;
+        float targetY = transform.position.y;
 
-        Vector3 targetPos = new Vector3(targetX, transform.position.y, transform.position.z);
+        if (isY)
+        {
+            targetY = bossAtPos1 ? bossY1 : bossY2;
+        }
+
+        Vector3 targetPos = new Vector3(targetX, targetY, transform.position.z);
 
         transform.position = Vector3.Lerp(transform.position, targetPos, bossMoveSpeed * Time.deltaTime);
     }
