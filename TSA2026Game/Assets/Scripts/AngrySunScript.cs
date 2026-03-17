@@ -18,7 +18,7 @@ public class AngrySunScript : MonoBehaviour
     float posX, posY;
     float angle;
 
-    private float journeyTime = 1.5f;
+    private float journeyTime = 2.5f;
     private float startTime;
 
     public string stateString = "StandStill";
@@ -104,14 +104,14 @@ public class AngrySunScript : MonoBehaviour
             return;
         }
 
-        sweepArc = Mathf.Clamp((cameraPos.position.y - playerPos.y) / 4f, 0.1f, 1f);
+        sweepArc = Mathf.Clamp((cameraPos.position.y - playerPos.y) / 2f, 0.1f, 1f);
 
         float t = Mathf.InverseLerp(0.1f, 1f, sweepArc);
         sweepArc = Mathf.Lerp(10f, 1f, t);
 
         timer += Time.deltaTime;
 
-        if (timer >= currentDelay)
+        if (stateString != "Sweep" && timer >= currentDelay)
         {
             SwitchState();
         }
@@ -178,12 +178,17 @@ public class AngrySunScript : MonoBehaviour
             Vector3 riseRelCenter = sunrise - center;
             Vector3 setRelCenter = sunset - center;
 
-            float fracComplete = (Time.time - startTime) / journeyTime;
+            float fracComplete = Mathf.Clamp01((Time.time - startTime) / journeyTime);
 
             transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
             transform.position += center;
 
             currentDelay = journeyTime;
+
+            if (fracComplete >= 1f)
+            {
+                SwitchState();
+            }
         }
     }
 

@@ -84,7 +84,7 @@ public class ControlScript : MonoBehaviour
 
             foreach (Collider col in all)
             {
-                if (!col.CompareTag("Ground"))
+                if (!col.CompareTag("Ground") && !col.CompareTag("SunTrigger"))
                 {
                     Physics.IgnoreCollision(m_ObjectCollider, col, false);
                 }
@@ -96,7 +96,7 @@ public class ControlScript : MonoBehaviour
 
             foreach (Collider col in all)
             {
-                if (!col.CompareTag("Ground"))
+                if (!col.CompareTag("Ground") && !col.CompareTag("SunTrigger"))
                 {
                     Physics.IgnoreCollision(m_ObjectCollider, col, true);
                 }

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - PlayerTag
   - Shield
+  - SunTrigger
   layers:
   - Default
   - TransparentFX

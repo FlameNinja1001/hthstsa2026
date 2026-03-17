@@ -235,7 +235,7 @@ MonoBehaviour:
   goal2: {fileID: 0}
   targetTransform: {fileID: 0}
   speed: 3.5
-  distance: 1
+  distance: 1.5
   initialXScale: 0
   playerPos: {fileID: 0}
   damageHitbox: {fileID: 1353784288841374708}

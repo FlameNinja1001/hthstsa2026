@@ -115,12 +115,12 @@ MonoBehaviour:
   animator: {fileID: 7423278604765244292}
   hidePos: {fileID: 0}
   playerTransform: {fileID: 0}
-  distanceThreshold: 13
+  distanceThreshold: 10
   target: {fileID: 0}
   canSet: 1
   setTargetDelay: 0.5
   returnSpeed: 10
-  chaseSpeed: 4
+  chaseSpeed: 3
   currentSpeed: 0
 --- !u!114 &7423278604856107448
 MonoBehaviour:
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d2adc8505d24ef9869906f4f165f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 1
   heartObj: {fileID: 3407595816476754137, guid: db92e33b66008482ca0fd31343f879c1,
     type: 3}
   chance: 90

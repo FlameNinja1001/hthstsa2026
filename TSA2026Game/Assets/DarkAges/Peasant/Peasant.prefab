@@ -119,6 +119,7 @@ MonoBehaviour:
   distance: 1
   model: {fileID: 7360125744165958441}
   initialXScaleMesh: 0
+  isBird: 0
 --- !u!114 &7649094497984178207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d2adc8505d24ef9869906f4f165f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 6
   heartObj: {fileID: 3407595816476754137, guid: db92e33b66008482ca0fd31343f879c1,
     type: 3}
   chance: 90

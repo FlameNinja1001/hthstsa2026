@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Neighborhood.unity
     guid: 94576f7aa3d6745679fe2062c9c38b3c
+  - enabled: 1
+    path: Assets/Scenes/DarkAges.unity
+    guid: 4d6eec74ef83d42c2a44fa3d650cd5a3
   m_configObjects: {}
