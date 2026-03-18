@@ -9,17 +9,24 @@ public class SkeletonScript : MonoBehaviour
 
     public Vector3 sizeAfter;
     public Vector3 centerAfter;
+
     Rigidbody rb;
     public Transform player;
+
     public float moveDirection = 1;
     public float walkSpeed;
+
     public bool isGrounded;
     public float rayCastDistance;
+
     public float timer;
     public float inBetweenJumpDuration;
+
     public string currentState;
+
     public float jumpVelocity;
     public float leapSpeed;
+
     public float jumpTimer;
     public float actualJumpDuration;
 
@@ -28,31 +35,48 @@ public class SkeletonScript : MonoBehaviour
 
     public float ogScaleX;
     public float distPlayer;
+
     public bool isActive;
     public bool hasBeenActive;
+
     BoxCollider boxCollider;
-    // Start is called before the first frame update
+
+    // ⭐ DIRECTIONAL SHINE
+    public GameObject leftShine;
+    public GameObject rightShine;
+
+    public float shineSeconds;
+    public float shineAnimSeconds;
+
+    private float shineTimer;
+    private bool hasShined;
+
     void Start()
     {
         ogScaleX = mesh.localScale.x;
         rb = GetComponent<Rigidbody>();
         currentState = "Walking";
         boxCollider = GetComponent<BoxCollider>();
+
+        if (leftShine != null) leftShine.SetActive(false);
+        if (rightShine != null) rightShine.SetActive(false);
     }
 
-    // Update is called once per frame
     void FixedUpdate()
-    {       
+    {
+        // Activation check
         if (Vector3.Distance(player.position, transform.position) < distPlayer)
         {
-            isActive = true;            
+            isActive = true;
         }
         else if (Vector3.Distance(player.position, transform.position) > distPlayer * 1.5)
         {
-            isActive = false;            
+            isActive = false;
         }
+
         if (isActive)
         {
+            // Collider swap
             if (!isGrounded)
             {
                 boxCollider.size = sizeAfter;
@@ -63,10 +87,14 @@ public class SkeletonScript : MonoBehaviour
                 boxCollider.size = sizeBefore;
                 boxCollider.center = centerBefore;
             }
-            animator.SetBool("IsGrounded",isGrounded);
+
+            animator.SetBool("IsGrounded", isGrounded);
+
+            // Jump duration handling
             if (currentState == "Jumping")
-            {                            
+            {
                 jumpTimer += Time.deltaTime;
+
                 if (jumpTimer >= actualJumpDuration)
                 {
                     currentState = "Walking";
@@ -74,49 +102,93 @@ public class SkeletonScript : MonoBehaviour
             }
             else
             {
-                jumpTimer = 0;                
-            }        
-            if (timer >= inBetweenJumpDuration && currentState == "Walking")
-            {
-                currentState = "Jumping";
+                jumpTimer = 0;
             }
+
+            // ⭐ SHINE + JUMP LOGIC
+            if (currentState == "Walking")
+            {
+                timer += Time.deltaTime;
+
+                // Start shine BEFORE jump
+                if (timer >= inBetweenJumpDuration - shineSeconds && !hasShined)
+                {
+                    shineTimer = 0f;
+                    hasShined = true;
+                }
+
+                // Handle shine
+                if (hasShined)
+                {
+                    shineTimer += Time.deltaTime;
+
+                    // Direction-based shine switching
+                    if (moveDirection == 1)
+                    {
+                        if (rightShine != null) rightShine.SetActive(true);
+                        if (leftShine != null) leftShine.SetActive(false);
+                    }
+                    else
+                    {
+                        if (leftShine != null) leftShine.SetActive(true);
+                        if (rightShine != null) rightShine.SetActive(false);
+                    }
+
+                    // End shine
+                    if (shineTimer >= shineAnimSeconds)
+                    {
+                        if (leftShine != null) leftShine.SetActive(false);
+                        if (rightShine != null) rightShine.SetActive(false);
+                    }
+                }
+
+                // Trigger jump
+                if (timer >= inBetweenJumpDuration)
+                {
+                    currentState = "Jumping";
+                    timer = 0f;
+                    hasShined = false;
+                }
+            }
+
+            // Direction + rotation
             if (isGrounded)
             {
-                mesh.localRotation = Quaternion.Euler(0,0,0);
+                mesh.localRotation = Quaternion.Euler(0, 0, 0);
+
                 if (player.position.x >= transform.position.x)
                 {
                     moveDirection = 1;
-                    mesh.localScale = new Vector3(ogScaleX, mesh.localScale.y,mesh.localScale.z);
+                    mesh.localScale = new Vector3(ogScaleX, mesh.localScale.y, mesh.localScale.z);
                 }
                 else
                 {
                     moveDirection = -1;
-                    mesh.localScale = new Vector3(-ogScaleX, mesh.localScale.y,mesh.localScale.z);
+                    mesh.localScale = new Vector3(-ogScaleX, mesh.localScale.y, mesh.localScale.z);
                 }
             }
             else
             {
-                mesh.localRotation = Quaternion.Euler(0,45 * -moveDirection,0);
+                mesh.localRotation = Quaternion.Euler(0, 45 * -moveDirection, 0);
             }
-            
+
+            // Movement
             if (currentState == "Walking" && isGrounded)
             {
-                timer += Time.deltaTime;
-                rb.velocity = new Vector3(walkSpeed * moveDirection,rb.velocity.y,rb.velocity.z);
+                rb.velocity = new Vector3(walkSpeed * moveDirection, rb.velocity.y, rb.velocity.z);
             }
             else if (currentState == "Walking" && !isGrounded)
             {
-                timer = 0f;
                 jumpTimer = 0f;
-                rb.velocity = new Vector3(leapSpeed * moveDirection,rb.velocity.y,rb.velocity.z);
-                rb.velocity += new Vector3(0f,-1f,0f);
+                rb.velocity = new Vector3(leapSpeed * moveDirection, rb.velocity.y, rb.velocity.z);
+                rb.velocity += new Vector3(0f, -1f, 0f);
             }
-            else
+            else // Jumping
             {
-                timer = 0f;
-                rb.velocity = new Vector3(leapSpeed * moveDirection, jumpVelocity,rb.velocity.z);
+                rb.velocity = new Vector3(leapSpeed * moveDirection, jumpVelocity, rb.velocity.z);
             }
-            
+
+            // Ground check
             RaycastHit hit;
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, rayCastDistance))
@@ -134,31 +206,32 @@ public class SkeletonScript : MonoBehaviour
             {
                 isGrounded = false;
             }
-        }   
+        }
         else
         {
-            // Reset timers
+            // FULL RESET
             timer = 0f;
             jumpTimer = 0f;
 
-            // Reset state
             currentState = "Walking";
 
-            // Reset movement
             rb.velocity = Vector3.zero;
 
-            // Reset grounding
             isGrounded = false;
 
-            // Reset mesh rotation
             mesh.localRotation = Quaternion.Euler(0, 0, 0);
 
-            // Face default direction
             moveDirection = 1;
             mesh.localScale = new Vector3(ogScaleX, mesh.localScale.y, mesh.localScale.z);
 
-            // Reset animator
             animator.SetBool("IsGrounded", false);
-        }    
+
+            // ⭐ RESET SHINES
+            if (leftShine != null) leftShine.SetActive(false);
+            if (rightShine != null) rightShine.SetActive(false);
+
+            hasShined = false;
+            shineTimer = 0f;
+        }
     }
 }
