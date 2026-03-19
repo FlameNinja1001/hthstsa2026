@@ -20,7 +20,7 @@ public class AnimatePlayer : MonoBehaviour
         meleeScript = GetComponent<MeleeScript>();
     }
     void Update()
-    {
+    {        
         if (controlScript.moveDirection > 0)
         {
             model.localRotation = Quaternion.Euler(0, -80, 0);
@@ -40,5 +40,19 @@ public class AnimatePlayer : MonoBehaviour
         animator.SetBool("IsRunning", controlScript.move.x != 0);
         animator.SetBool("IsDashing", controlScript.isDashing);
         animator.SetBool("IsShooting", projectileScript.isShootAnimBoolActive);
+
+        TMScript tMScript = FindObjectOfType<TMScript>(); 
+        if (tMScript != null && !tMScript.canPlayerMove)
+        {
+            Debug.LogWarning("bum");
+            animator.SetBool("IsGrounded", true);
+            animator.SetBool("IsSlashing", false);
+            animator.SetBool("IsDoubleJumping", false);
+            animator.SetBool("IsWallSliding", false);
+            animator.SetBool("IsWallJumping", false);
+            animator.SetBool("IsRunning", false);
+            animator.SetBool("IsDashing", false);
+            animator.SetBool("IsShooting", false);
+        }
     }
 }

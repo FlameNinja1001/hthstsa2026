@@ -51,6 +51,7 @@ public class ControlScript : MonoBehaviour
     public bool hasAirDashed = false;
     public float damageSpeed;
     private Collider m_ObjectCollider;
+    bool tmPlayerMove;
 
     void Awake()
     {
@@ -72,12 +73,21 @@ public class ControlScript : MonoBehaviour
 
     void FixedUpdate()
     {           
+        TMScript tMScript = FindObjectOfType<TMScript>(); 
+        if (tMScript != null)
+        {
+            tmPlayerMove = tMScript.canPlayerMove;
+        }        
+        else
+        {
+            tmPlayerMove = true;
+        }
         if (!BossRoomScript.canPlayerMove)
         {
             rb.velocity = new Vector3(0,0,0);
             return;
         }
-        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();        
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();               
         if (playerHealth.canBeDamaged)
         {
             Collider[] all = FindObjectsOfType<Collider>();
@@ -103,7 +113,7 @@ public class ControlScript : MonoBehaviour
             }            
         }
         
-        if (playerHealth.canPlayerMove)
+        if (playerHealth.canPlayerMove && tmPlayerMove)
         {            
                     
             // Read input
@@ -234,10 +244,14 @@ public class ControlScript : MonoBehaviour
                 StartCoroutine(WallJumpCoroutine());            
             
         }
-        else
+        else if (!playerHealth.canPlayerMove)
         {
             gravity = normalGravity;
             rb.velocity = new Vector3(moveDirection * -damageSpeed, -gravity, rb.velocity.z);
+        }
+        else if (!tmPlayerMove)
+        {
+            rb.velocity = new Vector3(0f, 0f, 0f);
         }
         
     }
