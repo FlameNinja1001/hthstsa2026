@@ -588,8 +588,8 @@ MonoBehaviour:
   timer: 0
   inBetweenJumpDuration: 3
   currentState: 
-  jumpVelocity: 26
-  leapSpeed: 15
+  jumpVelocity: 27
+  leapSpeed: 16
   jumpTimer: 0
   actualJumpDuration: 0.01
   mesh: {fileID: 9089571546877645678}
@@ -601,7 +601,7 @@ MonoBehaviour:
   leftShine: {fileID: 9089571547256021436}
   rightShine: {fileID: 9089571547179255247}
   shineSeconds: 0.7
-  shineAnimSeconds: 0.7
+  shineAnimSeconds: 0.5
 --- !u!54 &9089571545683305251
 Rigidbody:
   m_ObjectHideFlags: 0

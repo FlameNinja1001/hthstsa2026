@@ -1445,7 +1445,7 @@ MonoBehaviour:
   isGrounded: 0
   shineObject: {fileID: 1581408493792415904}
   shineSeconds: 0.7
-  shineAnimSeconds: 0.7
+  shineAnimSeconds: 0.5
 --- !u!114 &1581408492003452365
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7813,12 +7813,12 @@ MonoBehaviour:
   inScene: {fileID: 1848003142}
   outScene: {fileID: 1166900179}
   player: {fileID: 1370322296}
-  boss: {fileID: 2117474556}
+  boss: {fileID: 1492915003}
   camera: {fileID: 1590849989026322230}
   audio: {fileID: 1710227398}
-  song: {fileID: 8300000, guid: d26ef7a93d8f2478c854366ded0eb41a, type: 3}
+  song: {fileID: 8300000, guid: 323a5461998db454aaf4936af747c4c9, type: 3}
   introVictDuration: 0.25
-  victoryDuration: 1
+  victoryDuration: 4
   isTutorial: 0
 --- !u!4 &810127964
 Transform:
@@ -14016,6 +14016,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dadfa476bd6848d8ada3032e93e6204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1492915003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1581408492003452360, guid: f7685c9572a804e80945145e097fd898,
+    type: 3}
+  m_PrefabInstance: {fileID: 1492915001}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1508510336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20236,12 +20242,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 62
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &2117474556 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7884513590947811397, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7884513591820399757}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2118598883
 PrefabInstance:
   m_ObjectHideFlags: 0
