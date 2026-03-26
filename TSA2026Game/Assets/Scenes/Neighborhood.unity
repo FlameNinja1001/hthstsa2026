@@ -7949,6 +7949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6374df919749f6b680649c8cf8333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadString: StoryString
   sunObj: {fileID: 1674764928}
   checkPointGoals:
   - {fileID: 2043385522}
@@ -7967,6 +7968,7 @@ MonoBehaviour:
   camera: {fileID: 1590849989026322230}
   audio: {fileID: 1710227398}
   song: {fileID: 8300000, guid: d26ef7a93d8f2478c854366ded0eb41a, type: 3}
+  die: {fileID: 0}
   introVictDuration: 0.25
   victoryDuration: 1
   isTutorial: 1
@@ -11979,6 +11981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3beb692493ff84fec849cfeb76e7198f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadString: StoryString
   fadeMaterial: {fileID: 2100000, guid: c13633c11a74c42198959cbc98d3bf7e, type: 2}
   fadeDuration: 1
   fadeColor: {r: 1, g: 1, b: 1, a: 1}

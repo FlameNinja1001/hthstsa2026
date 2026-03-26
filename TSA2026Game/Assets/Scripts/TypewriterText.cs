@@ -4,12 +4,14 @@ using TMPro;
 
 public class TypewriterText : MonoBehaviour
 {
-    [TextArea] public string inputText;     // Text to type out
-    public float startDelay = 0.5f;         // Delay before typing starts
-    public float typingSpeed = 0.05f;       // Time between each letter
+    [TextArea] public string inputText;
+    public float startDelay = 0.5f;
+    public float typingSpeed = 0.05f;
 
     private TMP_Text textDisplay;
     private Coroutine typingCoroutine;
+
+    public bool isTyping { get; private set; }   // 🔹 ADD THIS
 
     void Start()
     {
@@ -27,6 +29,8 @@ public class TypewriterText : MonoBehaviour
 
     IEnumerator TypeText(string fullText)
     {
+        isTyping = true;   // 🔹 START typing
+
         textDisplay.text = "";
         yield return new WaitForSeconds(startDelay);
 
@@ -35,5 +39,7 @@ public class TypewriterText : MonoBehaviour
             textDisplay.text += c;
             yield return new WaitForSeconds(typingSpeed);
         }
+
+        isTyping = false;  // 🔹 DONE typing
     }
 }

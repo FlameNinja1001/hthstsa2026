@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class TMScript : MonoBehaviour
 {
+    public string loadString;
     [Header("Fade")]
     public Material fadeMaterial;
     public float fadeDuration = 1f;
@@ -80,7 +82,7 @@ public class TMScript : MonoBehaviour
         if (!inputReleased && !input.Player.Start.IsPressed())
             inputReleased = true;
 
-        if (inputReleased && input.Player.Start.IsPressed())
+        if (inputReleased && input.Player.Start.IsPressed() && !typewriter.isTyping)
         {
             inputReleased = false;
             NextLine();
@@ -262,6 +264,7 @@ public class TMScript : MonoBehaviour
         SceneLoadManager sceneLoadManager = FindObjectOfType<SceneLoadManager>();
         StartCoroutine(sceneLoadManager.OutroCoroutine(false));
         yield return new WaitForSeconds(delay0 * 2);
+        SceneManager.LoadScene(loadString);          
     }
     IEnumerator Fade(float start, float end, float duration)
     {

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoadManager : MonoBehaviour
 {
+    public string loadString;
     public GameObject sunObj;
     public Transform[]checkPointGoals;
 
@@ -24,6 +25,7 @@ public class SceneLoadManager : MonoBehaviour
     bool hasCalled = false;
     public AudioSource audio;
     public AudioClip song;
+    public AudioClip die;
     public float introVictDuration;
     public float victoryDuration;
     public bool isTutorial = false;
@@ -103,6 +105,10 @@ public class SceneLoadManager : MonoBehaviour
     public IEnumerator Death()
     {
         audio.Stop();
+        audio.clip = die;
+        audio.loop = false;
+        // Play the new clip
+        audio.Play();
         yield return new WaitForSeconds(deathDelay);
         StartCoroutine(OutroCoroutine(false));
         yield return new WaitForSeconds(delayTimer);
@@ -123,6 +129,7 @@ public class SceneLoadManager : MonoBehaviour
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();  
         playerHealth.canBeDamaged = false;
         audio.Stop();
+        audio.loop = false;
         yield return new WaitForSeconds(introVictDuration);
         audio.clip = song;
         // Play the new clip
@@ -133,7 +140,8 @@ public class SceneLoadManager : MonoBehaviour
         yield return new WaitForSeconds(deathDelay);
         StartCoroutine(OutroCoroutine(false));
         yield return new WaitForSeconds(delayTimer);
-        yield return new WaitForSeconds(deathDelay);               
+        yield return new WaitForSeconds(deathDelay);  
+        SceneManager.LoadScene(loadString);             
     }
     
 }

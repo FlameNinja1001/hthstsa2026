@@ -7799,6 +7799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6374df919749f6b680649c8cf8333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadString: StoryString
   sunObj: {fileID: 1682985197}
   checkPointGoals:
   - {fileID: 1467831697}
@@ -7816,7 +7817,8 @@ MonoBehaviour:
   boss: {fileID: 1492915003}
   camera: {fileID: 1590849989026322230}
   audio: {fileID: 1710227398}
-  song: {fileID: 8300000, guid: 323a5461998db454aaf4936af747c4c9, type: 3}
+  song: {fileID: 8300000, guid: 8e6faaf7f64df4b8fb88fe098b16d45e, type: 3}
+  die: {fileID: 8300000, guid: aafb420ff70cf45d281856412049914b, type: 3}
   introVictDuration: 0.25
   victoryDuration: 4
   isTutorial: 0
