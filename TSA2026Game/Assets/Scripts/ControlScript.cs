@@ -31,7 +31,6 @@ public class ControlScript : MonoBehaviour
     public bool canDoubleJump = false;
     public bool hasDoubleJumped = false;
 
-    // Wall jump + double jump tracking
     public bool hasUsedWallJumpDouble = false;
 
     public bool isRaycastHittingWall = false;
@@ -43,7 +42,6 @@ public class ControlScript : MonoBehaviour
     public bool isWallJumping = false;
     public bool canWallJump = false;
 
-    // Track jump release to prevent auto-double jump
     public bool jumpReleased = true;
     public bool animBool;
     public float doubleJumpAnim = 0.5f;
@@ -53,12 +51,16 @@ public class ControlScript : MonoBehaviour
     private Collider m_ObjectCollider;
     bool tmPlayerMove;
 
+    // ⭐ NEW: Track last wall jumped from
+    private Collider lastWallJumpedFrom;
+    // ⭐ NEW OFFSETS
+    private float groundRayOffset = 1.5f;
+
     void Awake()
     {
         input = new PlayerInputActions();
         rb = GetComponent<Rigidbody>();
         m_ObjectCollider = GetComponent<CapsuleCollider>();
-        
     }
 
     void OnEnable()
@@ -75,58 +77,46 @@ public class ControlScript : MonoBehaviour
     {           
         TMScript tMScript = FindObjectOfType<TMScript>(); 
         if (tMScript != null)
-        {
             tmPlayerMove = tMScript.canPlayerMove;
-        }        
         else
-        {
             tmPlayerMove = true;
-        }
+
         if (!BossRoomScript.canPlayerMove)
         {
             rb.velocity = new Vector3(0,0,0);
             return;
         }
+
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();               
+
         if (playerHealth.canBeDamaged)
         {
             Collider[] all = FindObjectsOfType<Collider>();
-
             foreach (Collider col in all)
             {
                 if (!col.CompareTag("Ground") && !col.CompareTag("SunTrigger"))
-                {
                     Physics.IgnoreCollision(m_ObjectCollider, col, false);
-                }
             }           
         }
         else 
         {
             Collider[] all = FindObjectsOfType<Collider>();
-
             foreach (Collider col in all)
             {
                 if (!col.CompareTag("Ground") && !col.CompareTag("SunTrigger"))
-                {
                     Physics.IgnoreCollision(m_ObjectCollider, col, true);
-                }
             }            
         }
         
         if (playerHealth.canPlayerMove && tmPlayerMove)
         {            
-                    
-            // Read input
             jump = input.Player.Jump.IsPressed();
             move = input.Player.Move.ReadValue<Vector2>();
             dash = input.Player.Dash.IsPressed();
 
             if (isGrounded)
-            {
                 hasAirDashed = false;
-            }
 
-            // Track jump release
             if (!jump)
                 jumpReleased = true;
 
@@ -153,14 +143,13 @@ public class ControlScript : MonoBehaviour
                 gravity = normalGravity;
             }
 
-            // Double jump logic (requires jumpReleased)
             if (canDoubleJump && jump && jumpReleased && !hasDoubleJumped && !isWallJumping)
             {
                 StartCoroutine(AnimBoolRoutine());
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
                 hasDoubleJumped = true;
                 hasUsedWallJumpDouble = true;
-                jumpReleased = false; // must release to jump again
+                jumpReleased = false;
             }
 
             if (move.x > 0)
@@ -203,46 +192,61 @@ public class ControlScript : MonoBehaviour
             if (!dash)
                 canDash = true;
 
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, rayLength))
-            {
-                if (hit.collider.CompareTag("Ground"))
-                {
-                    isGrounded = true;
-                    canDoubleJump = false;
-                    hasDoubleJumped = false;
+            // GROUND CHECK
+            // GROUND CHECK (3 RAYS)
+            RaycastHit hitCenter, hitLeft, hitRight;
 
-                    // Reset everything on ground
-                    hasUsedWallJumpDouble = false;
-                    jumpReleased = true;
-                }
-                else
-                {
-                    isGrounded = false;
-                }
+            bool centerHit = Physics.Raycast(transform.position, Vector3.down, out hitCenter, rayLength);
+            bool leftHit = Physics.Raycast(transform.position + Vector3.left * groundRayOffset, Vector3.down, out hitLeft, rayLength);
+            bool rightHit = Physics.Raycast(transform.position + Vector3.right * groundRayOffset, Vector3.down, out hitRight, rayLength);
+
+            // DEBUG
+            Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
+            Debug.DrawRay(transform.position + Vector3.left * groundRayOffset, Vector3.down * rayLength, Color.blue);
+            Debug.DrawRay(transform.position + Vector3.right * groundRayOffset, Vector3.down * rayLength, Color.green);
+
+            if ((centerHit && hitCenter.collider.CompareTag("Ground")) ||
+                (leftHit && hitLeft.collider.CompareTag("Ground")) ||
+                (rightHit && hitRight.collider.CompareTag("Ground")))
+            {
+                isGrounded = true;
+                canDoubleJump = false;
+                hasDoubleJumped = false;
+
+                hasUsedWallJumpDouble = false;
+                jumpReleased = true;
+
+                // RESET WALL MEMORY
+                lastWallJumpedFrom = null;
             }
             else
             {
                 isGrounded = false;
             }
 
+            // WALL CHECK
+            Collider currentWall = null;
+
             RaycastHit hit2;
             if (Physics.Raycast(transform.position, (moveDirection > 0) ? Vector3.right : Vector3.left, out hit2, sideRayLength))
             {
                 if (hit2.collider.CompareTag("Ground"))
+                {
                     isRaycastHittingWall = true;
+                    currentWall = hit2.collider;
+                }
                 else
                     isRaycastHittingWall = false;
             }
             else
-                isRaycastHittingWall = false;       
+                isRaycastHittingWall = false;
 
             if (!isDashing && !isWallJumping)
                 rb.velocity = new Vector3(move.x * moveLeftRightSpeed, rb.velocity.y, rb.velocity.z);
 
-            if (jump && isWallSliding && canWallJump)
-                StartCoroutine(WallJumpCoroutine());            
-            
+            // ⭐ BLOCK SAME WALL
+            if (jump && isWallSliding && canWallJump && currentWall != lastWallJumpedFrom)
+                StartCoroutine(WallJumpCoroutine(currentWall));            
         }
         else if (!playerHealth.canPlayerMove)
         {
@@ -253,7 +257,6 @@ public class ControlScript : MonoBehaviour
         {
             rb.velocity = new Vector3(0f, 0f, 0f);
         }
-        
     }
 
     public IEnumerator DashCoroutine()
@@ -269,26 +272,26 @@ public class ControlScript : MonoBehaviour
 
         isDashing = false;
         rb.velocity = new Vector3(0f, rb.velocity.y, rb.velocity.z);
+
         if (!isGrounded)
-        {
             hasAirDashed = true;
-        }
     }
 
-    public IEnumerator WallJumpCoroutine()
+    public IEnumerator WallJumpCoroutine(Collider wall)
     {
         float timer = 0;
         isWallJumping = true;
         canJump = false;
 
+        // ⭐ STORE LAST WALL
+        lastWallJumpedFrom = wall;
+
         int initialMoveDir = moveDirection;
 
-        // ⭐ Reset jumpReleased to require release after wall jump
         jumpReleased = false;
 
         rb.velocity = new Vector3(wallJumpPushHoriz * -initialMoveDir, wallJumpPushVertical, rb.velocity.z);
 
-        // Only allow double jump ONCE until grounded
         if (!hasUsedWallJumpDouble)
         {
             canDoubleJump = true;
@@ -305,6 +308,7 @@ public class ControlScript : MonoBehaviour
         isWallJumping = false;    
         canWallJump = false;            
     }
+
     public IEnumerator AnimBoolRoutine()
     {
         animBool = true;

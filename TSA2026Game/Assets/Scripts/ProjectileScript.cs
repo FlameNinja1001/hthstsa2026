@@ -78,25 +78,28 @@ public class ProjectileScript : MonoBehaviour
 
         if (canShoot && shootButton && currentShots < ammoCount && !meleeScript.isSlashing && !controlScript.isDashing)
         {
-            currentShots +=1;
+            currentShots += 1;
             GameObject bullet = Instantiate(activeWeapon, new Vector3(transform.position.x + (currentDistance * moveDirection), transform.position.y + offset, transform.position.z), activeWeapon.transform.rotation);
-            bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * moveDirection,bullet.transform.localScale.y,bullet.transform.localScale.z);
+            bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * moveDirection, bullet.transform.localScale.y, bullet.transform.localScale.z);
+
+            // Stop the previous coroutine if any, to retrigger the animation
             if (shootCoroutine != null)
             {
                 StopCoroutine(shootCoroutine);
             }
-
             shootCoroutine = StartCoroutine(ShootAnimCoroutine());
+
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
             if (activeWeaponString != "Javelin")
             {
                 rb.velocity = Vector3.right * moveDirection * launchSpeed;
             }
-            else if (activeWeaponString == "Javelin")
+            else
             {
                 rb.velocity = new Vector3(moveDirection * launchSpeed, launchSpeed / 2.5f, rb.velocity.z);             
-                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x,bullet.transform.localScale.y * moveDirection,bullet.transform.localScale.z);   
+                bullet.transform.localScale = new Vector3(bullet.transform.localScale.x, bullet.transform.localScale.y * moveDirection, bullet.transform.localScale.z);   
             }
+
             canShoot = false;
         }
 
@@ -136,23 +139,44 @@ public class ProjectileScript : MonoBehaviour
     }
     public IEnumerator ShootAnimCoroutine()
     {
-        isShootAnimBoolActive = true;
-
-        float timer = 0f;
-
-        while (timer < 1f)
+        if (activeWeaponString == "Javelin" || activeWeaponString == "Slingshot")
         {
-            // Break immediately if melee button pressed
-            if (meleeScript.meleeButton)
+            // If already true, restart it
+            isShootAnimBoolActive = false;
+            yield return null; // wait one frame so Animator registers the reset
+            isShootAnimBoolActive = true;
+
+            float timer = 0f;
+            float animDuration = 0.3f; // <-- set to your shooting animation length
+
+            while (timer < animDuration)
             {
-                meleeScript.StartSlashFromElsewhere();
-                break;
+                timer += Time.deltaTime;
+                yield return null;
             }
 
-            timer += Time.deltaTime;
-            yield return null; // wait one frame
-        }
+            isShootAnimBoolActive = false;
+        }      
+        else
+        {
+            isShootAnimBoolActive = true;
 
-        isShootAnimBoolActive = false;
+            float timer = 0f;
+
+            while (timer < 1f)
+            {
+                // Break immediately if melee button pressed
+                if (meleeScript.meleeButton)
+                {
+                    meleeScript.StartSlashFromElsewhere();
+                    break;
+                }
+
+                timer += Time.deltaTime;
+                yield return null; // wait one frame
+            }
+
+            isShootAnimBoolActive = false;
+        }  
     }
 }

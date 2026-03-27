@@ -67,6 +67,7 @@ public class DialogueSceneManager : MonoBehaviour
         StartCoroutine(StartCutscene());
         SceneLoadManager.lives = 3;
         SceneLoadManager.checkpointSpawn = 0;
+        BossRoomScript.canPlayerMove = true;
     }
 
     void Update()
