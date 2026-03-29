@@ -4,6 +4,7 @@ public class ProjectileDamage : MonoBehaviour
 {
     public float life = 1.5f;
     public int damageAmount;
+    public bool isGood = true;
     private void Awake()
     {
         Destroy(gameObject,life);
@@ -21,7 +22,7 @@ public class ProjectileDamage : MonoBehaviour
         else if (other.GetComponent<EnemyHealth>() != null)
         {            
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            if (enemyHealth != null && isGood)
             {
                 enemyHealth.TakeDamage(damageAmount);
             }
