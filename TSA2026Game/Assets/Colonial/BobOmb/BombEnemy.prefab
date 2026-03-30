@@ -125,7 +125,7 @@ MonoBehaviour:
   initialYScaleMesh: 0
   initialZScaleMesh: 0
   player: {fileID: 0}
-  boomThreshold: 15
+  boomThreshold: 11
   isExploding: 0
   flashInterval: 0.25
   correctMeshActive: 0

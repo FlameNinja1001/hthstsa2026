@@ -39,7 +39,7 @@ public class BombScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {  
-        if (count >= 3)
+        if (count > 4)
         {
             Instantiate(explosionPrefab, new Vector3(transform.position.x,transform.position.y + 1.5f, transform.position.z), explosionPrefab.transform.rotation);
             Destroy(gameObject);

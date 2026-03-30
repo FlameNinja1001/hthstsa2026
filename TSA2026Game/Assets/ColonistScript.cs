@@ -24,6 +24,7 @@ public class ColonistScript : MonoBehaviour
     public GameObject bulletObj;
     public float launchSpeed;
     public float vertOffset;
+    private float horizDist = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class ColonistScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {  
+    {          
         timer += Time.deltaTime;
         if (timer >= shootTimer)
         {
@@ -83,11 +84,26 @@ public class ColonistScript : MonoBehaviour
 
     public IEnumerator Shoot()
     {
-        GameObject bullet = Instantiate(bulletObj, new Vector3(transform.position.x,transform.position.y + vertOffset,transform.position.z), bulletObj.transform.rotation);
-        bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * moveDirection, bullet.transform.localScale.y, bullet.transform.localScale.z);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(moveDirection * launchSpeed, rb.velocity.y, rb.velocity.z);             
+        GameObject player = GameObject.FindWithTag("PlayerTag");
+        if (Mathf.Abs(transform.position.x - player.transform.position.x) < horizDist)
+        {
+             GameObject bullet = Instantiate(bulletObj, new Vector3(transform.position.x,transform.position.y + vertOffset,transform.position.z), bulletObj.transform.rotation);
+            bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * moveDirection, bullet.transform.localScale.y, bullet.transform.localScale.z);
 
+
+            Collider m_ObjectCollider = bullet.GetComponent<Collider>();        
+
+            Collider[] all = FindObjectsOfType<Collider>();
+            foreach (Collider col in all)
+            {
+                if (col.gameObject.CompareTag("Enemy"))
+                    Physics.IgnoreCollision(m_ObjectCollider, col, true);
+            } 
+
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.velocity = new Vector3(moveDirection * launchSpeed, rb.velocity.y, rb.velocity.z);             
+
+        }       
         yield return new WaitForSeconds(shootDuration);
         isShooting = false;
         hasStarted = false;
