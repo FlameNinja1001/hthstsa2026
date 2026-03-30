@@ -240,15 +240,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text1: {fileID: 420206782}
   flash1: {fileID: 1211121494}
+  obj1: {fileID: 1920635991}
+  obj2: {fileID: 1135230878}
   flashDuration: 0.2
   bringUpDuration: 1
   textAppearDuration: 2
   startY: 515
   endY: -54
-  canFlashArrow: 0
-  obj1: {fileID: 1920635991}
-  obj2: {fileID: 1135230878}
-  canMove: 0
   restartY: -196
   titleY: -288
   emptyFrame: {fileID: 760924093}
@@ -858,7 +856,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 998a23227a8a542b5ab734959e6a1c64, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 30e8566ff648e4ec0a2d13fa08476606, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

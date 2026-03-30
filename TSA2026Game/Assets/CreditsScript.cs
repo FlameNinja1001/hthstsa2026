@@ -33,15 +33,5 @@ public class CreditsScript : MonoBehaviour
                 moveDone = true;
             }
         }
-        // THEN FADE AUDIO
-        else
-        {
-            if (fadeTimer < fadeDuration)
-            {
-                float t = Mathf.Clamp01(fadeTimer / fadeDuration);
-                audioSource.volume = Mathf.Lerp(1f, 0f, t);
-                fadeTimer += Time.deltaTime;
-            }
-        }
     }
 }
