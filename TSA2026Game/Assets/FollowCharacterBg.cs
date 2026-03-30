@@ -7,6 +7,7 @@ public class FollowCharacterBg : MonoBehaviour
     public Transform cam;
     public int bgNum;
     MeshRenderer meshRenderer;
+    public float offset;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class FollowCharacterBg : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x, cam.position.y, transform.position.z); // Fix 2: player.position.z, not player.transform.z
+        transform.position = new Vector3(transform.position.x, cam.position.y + offset, transform.position.z); // Fix 2: player.position.z, not player.transform.z
         if (SceneLoadManager.checkpointSpawn == bgNum)
         {
             meshRenderer.enabled = true;

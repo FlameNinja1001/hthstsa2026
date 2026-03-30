@@ -97,9 +97,9 @@ GameObject:
   - component: {fileID: 7958891259677471652}
   - component: {fileID: 7958891259677471653}
   - component: {fileID: 7958891259677471672}
-  - component: {fileID: 7760075080063639383}
+  - component: {fileID: -3577065457745947997}
   m_Layer: 0
-  m_Name: CannonBall
+  m_Name: CannonBall 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d9edf4944de4e44afc16ede6a55d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 9
+  xSpeed: -9
   ySpeed: 3
   a: -1.25
   b: 4
@@ -225,7 +225,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7760075080063639383
+--- !u!114 &-3577065457745947997
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
