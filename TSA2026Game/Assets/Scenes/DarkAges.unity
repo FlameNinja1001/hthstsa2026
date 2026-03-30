@@ -2836,13 +2836,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5062288f12d47728845c31de5f7a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  player: {fileID: 0}
+  target: {fileID: 1492915002}
+  player: {fileID: 1370322296}
   moveUpUnits: 5
   moveRightUnits: 10
   moveSpeed: 2
   hasWent: 0
-  myAudioSource: {fileID: 0}
+  myAudioSource: {fileID: 1710227398}
   newSong: {fileID: 8300000, guid: 566c2c7704c5c4545b91d81bdd58b4c6, type: 3}
 --- !u!65 &272245517
 BoxCollider:
@@ -9876,7 +9876,7 @@ PrefabInstance:
     - target: {fileID: 2618669842767913004, guid: 63c6d7d9ce2374e06ac0b525d9508d21,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -51.3
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2618669842767913006, guid: 63c6d7d9ce2374e06ac0b525d9508d21,
         type: 3}

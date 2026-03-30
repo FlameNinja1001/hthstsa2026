@@ -408,22 +408,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueSet1:
-  - NED IS WANTING TO GO TO THE STORE
-  - YAP
+  - NED is a 13-year old boy who loves Video Games! (press ENTER)
+  - "NED is extremely excited for the nearby Video Game Store\u2019s Grand Opening!
+    Help NED get to the store!!"
   dialogueSet2:
-  - OH NO
-  - "HERE COMES MESO\t"
+  - THE STORE OWNER cast a spell on NED, and something strange happened! (press ENTER)
+  - "NED had no idea why, but he felt his body shift\u2026into something more \u201CRetro\u201D...\n\n"
+  - "NED opened his eyes, and looked around\u2026he was in ANCIENT MESOPOTAMIA!\n\n"
+  - Help NED get back to the present day!
   dialogueSet3:
-  - WOW DARK AGES
-  - HOORAY
+  - After taking on GILGAMESH, NED felt exhausted. On the ground, he picked up new
+    weapons! (press ENTER)
+  - 'His BAT was replaced with a MACE (press X to use), and his SLINGSHOT a JAVELIN
+    (press Z to use).
+
+'
+  - "NED now woke up in the DARK AGES, and felt like his time period was \u201Cin
+    another castle!\u201D"
   dialogueSet4:
-  - COLONIAL IS TUFFF
-  - AYO NAH
+  - After defeating LANCELOT, NED spotted some new loot. Excited, he ran towards
+    it and obtained it. (press ENTER)
+  - 'His MACE was replaced with a SWORD (press X to use), and his JAVELIN a CROSSBOW
+    (press Z to use).
+
+'
+  - 'NED was moved through time again and found himself in COLONIAL AMERICA. He felt
+    like he was almost back to the present! '
   dialogueSet5:
-  - FINAL BOSS
-  - SCARY
+  - KING GEORGE & GEORGE WASHINGTON surrendered and gave their weapons to NED. (press
+    ENTER)
+  - '
+
+    His SWORD was replaced with a MUSKET BLADE (press X to use), and his CROSSBOW
+    a MUSKET BULLET (press Z to use).
+
+'
+  - 'After making his way through around 5,000 YEARS in History, NED found himself
+    back in the present.
+
+'
+  - 'His body shifted back into something less RETRO, and more normal. He woke up
+    near the same store he was sent back in time by: THE RETRO ROOM.'
+  - Angry, NED confronted the owner...
   dialogueSet6:
-  - SUSSY BAKA
+  - NED had now defeated the TIMEKEEPER and successfully returned to the PRESENT!
+    (press ENTER)
+  - His journey complete, he learned that patience is an important virtue!
   loadStrings:
   - Neighborhood
   - Mesopotamia
