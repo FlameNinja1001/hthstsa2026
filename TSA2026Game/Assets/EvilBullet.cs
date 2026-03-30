@@ -23,7 +23,7 @@ public class EvilBullet : MonoBehaviour
         {
             Debug.Log("Hit material: " + mat.name);
         }
-        if (collision.gameObject.CompareTag("PlayerTag") || collision.gameObject.CompareTag("Ground") || (collision.gameObject.CompareTag("PlayerTag") && mat.name == "Ground") )
+        if (collision.gameObject.CompareTag("PlayerTag") || collision.gameObject.CompareTag("Ground") || (collision.gameObject.CompareTag("Untagged") && mat.name == "Ground") )
         {
             Invoke("DelayedMethod", 0.1f);            
         }

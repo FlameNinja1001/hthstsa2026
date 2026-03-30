@@ -15,14 +15,29 @@ public class TurretSpawnerScript : MonoBehaviour
 
     float timer;
 
+    public bool isTurret;
+
+    public Transform player;
+
+    public float treshold;
+
+
     void Update()
     {
         timer += Time.deltaTime;
 
         if (timer >= spawnRate)
         {
-            SpawnTurret();
-            timer = 0f;
+            if (!isTurret)
+            {
+                SpawnTurret();
+                timer = 0f;
+            }   
+            else if ((Mathf.Abs(player.transform.position.x - transform.parent.position.x) < treshold) && (Mathf.Abs(player.transform.position.y - transform.parent.position.y) < treshold))
+            {
+                SpawnTurret();
+                timer = 0f;
+            }         
         }
     }
 

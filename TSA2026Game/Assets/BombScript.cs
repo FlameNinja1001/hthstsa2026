@@ -34,6 +34,10 @@ public class BombScript : MonoBehaviour
         initialXScaleMesh = model.localScale.x;        
         initialYScaleMesh = model.localScale.y;        
         initialZScaleMesh = model.localScale.z;        
+         isExploding = false;
+            explosionTimer = 0f;
+            correctMeshActive = true;
+            count = 0;
     }
 
     // Update is called once per frame
@@ -47,14 +51,7 @@ public class BombScript : MonoBehaviour
         if (Vector3.Distance(player.transform.position, transform.position) < boomThreshold)
         {
             isExploding = true;
-        }
-        else
-        {
-            isExploding = false;
-            explosionTimer = 0f;
-            correctMeshActive = true;
-            count = 0;
-        }
+        }        
        
         if (targetTransform == goal1)
         {            
