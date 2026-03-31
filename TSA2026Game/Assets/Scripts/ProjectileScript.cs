@@ -93,6 +93,10 @@ public class ProjectileScript : MonoBehaviour
             if (activeWeaponString != "Javelin")
             {
                 rb.velocity = Vector3.right * moveDirection * launchSpeed;
+                if (activeWeaponString == "BowAndArrow")
+                {
+                    bullet.transform.localScale = new Vector3(bullet.transform.localScale.x, bullet.transform.localScale.y * moveDirection, bullet.transform.localScale.z);   
+                }
             }
             else
             {

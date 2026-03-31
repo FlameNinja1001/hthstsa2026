@@ -13,6 +13,10 @@ public class DialogueSceneManager : MonoBehaviour
     [TextArea] public string[] dialogueSet5;
     [TextArea] public string[] dialogueSet6;
 
+
+    [Header("Objects Per Dialogue Set")]
+    public GameObject[] dialogueObjects; // Size should be 6
+
     [Header("Scene Names (1 per set)")]
     public string[] loadStrings; // Should have 6 elements
 
@@ -40,6 +44,19 @@ public class DialogueSceneManager : MonoBehaviour
 
     private string[][] allDialogues;
 
+    void UpdateDialogueObjects()
+    {
+        if (dialogueObjects == null || dialogueObjects.Length == 0) return;
+
+        // Clamp index so it NEVER goes out of bounds
+        int safeIndex = Mathf.Clamp(currentDialogueIndex, 0, dialogueObjects.Length - 1);
+
+        for (int i = 0; i < dialogueObjects.Length; i++)
+        {
+            if (dialogueObjects[i] != null)
+                dialogueObjects[i].SetActive(i == safeIndex);
+        }
+    }
     void Awake()
     {
         input = new PlayerInputActions();
@@ -64,6 +81,7 @@ public class DialogueSceneManager : MonoBehaviour
 
     void Start()
     {
+        UpdateDialogueObjects(); // <-- ADD THIS
         StartCoroutine(StartCutscene());
         SceneLoadManager.lives = 3;
         SceneLoadManager.checkpointSpawn = 0;

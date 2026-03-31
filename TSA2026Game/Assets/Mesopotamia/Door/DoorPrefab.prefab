@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4d2adc8505d24ef9869906f4f165f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   heartObj: {fileID: 3407595816476754137, guid: db92e33b66008482ca0fd31343f879c1,
     type: 3}
   chance: 110

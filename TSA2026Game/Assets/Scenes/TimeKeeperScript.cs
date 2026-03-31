@@ -60,7 +60,7 @@ public class TimeKeeperScript : MonoBehaviour
         // Shoot
         if (timer >= idleDuration / 4 && !hasSpawnedPrefab)
         {
-            Instantiate(projectilePrefab, timeKeeper.transform.position, projectilePrefab.transform.rotation);
+            Instantiate(projectilePrefab, new Vector3(timeKeeper.transform.position.x,timeKeeper.transform.position.y,projectilePrefab.transform.position.z), projectilePrefab.transform.rotation);
             StartCoroutine(ShootAnim());
             hasSpawnedPrefab = true;
         }
