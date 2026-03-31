@@ -60,8 +60,7 @@ public class GameOverScript : MonoBehaviour
     }
 
     void Start()
-    {
-        FinalBossTextScript.hasWent = false;
+    {    
 
         textRect = text1.GetComponent<RectTransform>();
         flashRect = flash1.GetComponent<RectTransform>();
@@ -83,6 +82,7 @@ public class GameOverScript : MonoBehaviour
 
         SceneLoadManager.lives = 3;
         SceneLoadManager.checkpointSpawn = 0;
+        BossText.dialoguePlayed = false;
     }
 
     void Update()
