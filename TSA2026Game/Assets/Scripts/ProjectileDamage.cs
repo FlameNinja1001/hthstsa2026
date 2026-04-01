@@ -11,16 +11,18 @@ public class ProjectileDamage : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Collided with: " + other.gameObject.name);
+
         if (other.gameObject.CompareTag("Ground"))
-        {            
+        {
             Destroy(gameObject);
         }
         if (other.gameObject.CompareTag("Shield"))
-        {            
+        {
             Destroy(gameObject);
         }
         else if (other.GetComponent<EnemyHealth>() != null)
-        {            
+        {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth != null && isGood)
             {
