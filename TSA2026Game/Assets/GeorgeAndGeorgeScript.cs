@@ -6,6 +6,12 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
     [Header("Identity")]
     public bool isKing = false;
 
+    [Header("Animation")]
+    public Animator animator;
+
+    [Header("Shooting Visual")]
+    public GameObject gunObj;
+
     [Header("Stage Positions")]
     public Transform rightSide;
     public Transform leftSide;
@@ -41,6 +47,11 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
     void Start()
     {
         _mySide = isKing ? leftSide : rightSide;
+
+        // Ensure gun starts hidden
+        if (gunObj != null)
+            gunObj.SetActive(false);
+
         StartCoroutine(MainLoop());
     }
 
@@ -54,7 +65,6 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
         }
         else
         {
-            // Wait for King's full intro before the fight loop begins
             yield return new WaitForSeconds(introJumpDelay + introJumpDuration);
         }
 
@@ -67,73 +77,63 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
         }
     }
 
-    // ── King's self-contained loop ────────────────────────────────────────────
-    // King shoots → idles while Washington dashes → both swap → idles while Washington shoots → King dashes
-
     IEnumerator KingLoop()
     {
-        // King shoots
         yield return StartCoroutine(Shoot(shotCount, shotInterval));
         yield return new WaitForSeconds(postShootPause);
 
-        // Idle for exactly as long as Washington's dash takes
         float washDashTotal = dashToMiddleDuration + dashMiddlePause + dashBackDuration + preSwapPause;
         yield return new WaitForSeconds(washDashTotal);
 
-        // Both swap simultaneously — same duration, no coordination needed
         Transform kingTarget = (_mySide == leftSide) ? rightSide : leftSide;
         yield return StartCoroutine(ArcJump(transform.position, kingTarget.position,
                                             swapJumpHeight, swapJumpDuration));
         _mySide = kingTarget;
 
-        // Idle for exactly as long as Washington's shoot takes
         float washShootTotal = shotCount * shotInterval + postShootPause;
         yield return new WaitForSeconds(washShootTotal);
 
-        // King dashes
         yield return StartCoroutine(DashMiddleAndBack());
         yield return new WaitForSeconds(postShootPause);
     }
 
-    // ── Washington's self-contained loop ──────────────────────────────────────
-    // Idles while King shoots → Washington dashes → both swap → Washington shoots → idles while King dashes
-
     IEnumerator WashingtonLoop()
     {
-        // Idle for exactly as long as King's shoot takes
         float kingShootTotal = shotCount * shotInterval + postShootPause;
         yield return new WaitForSeconds(kingShootTotal);
 
-        // Washington dashes
         yield return StartCoroutine(DashMiddleAndBack());
         yield return new WaitForSeconds(preSwapPause);
 
-        // Both swap simultaneously
         Transform washTarget = (_mySide == rightSide) ? leftSide : rightSide;
         yield return StartCoroutine(ArcJump(transform.position, washTarget.position,
                                             swapJumpHeight, swapJumpDuration));
         _mySide = washTarget;
 
-        // Washington shoots
         yield return StartCoroutine(Shoot(shotCount, shotInterval));
         yield return new WaitForSeconds(postShootPause);
 
-        // Idle for exactly as long as King's dash takes
         float kingDashTotal = dashToMiddleDuration + dashMiddlePause + dashBackDuration + postShootPause;
         yield return new WaitForSeconds(kingDashTotal);
     }
 
-    // ── Movement coroutines ───────────────────────────────────────────────────
+    // ── Movement ─────────────────────────────────────────
 
     IEnumerator DashMiddleAndBack()
     {
+        SetDashing(true);
+
         yield return StartCoroutine(Dash(transform.position, middle.position, dashToMiddleDuration));
         yield return new WaitForSeconds(dashMiddlePause);
         yield return StartCoroutine(Dash(transform.position, _mySide.position, dashBackDuration));
+
+        SetDashing(false);
     }
 
     IEnumerator ArcJump(Vector3 from, Vector3 to, float height, float duration)
     {
+        SetJumping(true);
+
         float elapsed = 0f;
         Vector3 peak = Vector3.Lerp(from, to, 0.5f) + Vector3.up * height;
 
@@ -146,15 +146,22 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
             Vector3 b = Vector3.Slerp(peak, to, t);
 
             transform.position = Vector3.Lerp(a, b, t);
+
+            FaceDirection(to - from);
+
             yield return null;
         }
 
         transform.position = to;
+
+        SetJumping(false);
     }
 
     IEnumerator Dash(Vector3 from, Vector3 to, float duration)
     {
         float elapsed = 0f;
+
+        FaceDirection(to - from);
 
         while (elapsed < duration)
         {
@@ -168,6 +175,8 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
         transform.position = to;
     }
 
+    // ── Shooting ─────────────────────────────────────────
+
     IEnumerator Shoot(int count, float interval)
     {
         if (projectilePrefab == null || firePoint == null)
@@ -176,7 +185,11 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
             yield break;
         }
 
+        SetShooting(true);
+
         float moveDirection = (_mySide == leftSide) ? 1f : -1f;
+
+        FaceDirection(new Vector3(moveDirection, 0, 0));
 
         for (int i = 0; i < count; i++)
         {
@@ -204,5 +217,43 @@ public class GeorgeAndGeorgeScript : MonoBehaviour
 
             yield return new WaitForSeconds(interval);
         }
+
+        SetShooting(false);
+    }
+
+    // ── Animation Helpers ─────────────────────────────────
+
+    void SetShooting(bool value)
+    {
+        if (animator != null)
+            animator.SetBool("IsShooting", value);
+
+        if (gunObj != null)
+            gunObj.SetActive(value);
+    }
+
+    void SetJumping(bool value)
+    {
+        if (animator != null)
+            animator.SetBool("IsJumping", value);
+    }
+
+    void SetDashing(bool value)
+    {
+        if (animator != null)
+            animator.SetBool("IsDashing", value);
+    }
+
+    // ── Facing Direction ─────────────────────────────────
+
+    void FaceDirection(Vector3 direction)
+    {
+        if (direction.x == 0) return;
+
+        float dir = Mathf.Sign(direction.x);
+
+        Vector3 scale = transform.localScale;
+        scale.x = Mathf.Abs(scale.x) * dir;
+        transform.localScale = scale;
     }
 }
