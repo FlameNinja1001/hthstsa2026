@@ -9,6 +9,7 @@ TagManager:
   - PlayerTag
   - Shield
   - SunTrigger
+  - BirdTag
   layers:
   - Default
   - TransparentFX

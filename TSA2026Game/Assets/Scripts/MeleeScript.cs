@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MeleeScript : MonoBehaviour
 {
+    public GameObject uiElement;
     PlayerInputActions input;
     ProjectileScript projectileScript;
     public bool meleeButton;    
@@ -22,11 +23,13 @@ public class MeleeScript : MonoBehaviour
     void OnEnable()
     {
         input.Player.Enable();
+        uiElement.SetActive(true);
     }
 
     void OnDisable()
     {
         input.Player.Disable();
+        uiElement.SetActive(false);
     }
     void Start()
     {

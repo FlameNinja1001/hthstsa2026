@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ProjectileScript : MonoBehaviour
 {
+    public GameObject uiElement;
     PlayerInputActions input;
 
     
@@ -46,11 +47,13 @@ public class ProjectileScript : MonoBehaviour
     void OnEnable()
     {
         input.Player.Enable();
+        uiElement.SetActive(true);
     }
 
     void OnDisable()
     {
         input.Player.Disable();
+        uiElement.SetActive(false);
     }
     void Start()
     {
