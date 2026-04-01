@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 24791
+  controlID: 30288
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -87,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 1
-  controlID: 24792
+  controlID: 30289
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 8096}
   vertical: 0
-  controlID: 24793
+  controlID: 30290
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -226,10 +226,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 6272}
-      m_SelectedIDs: a49c0a00
-      m_LastClickedID: 695460
-      m_ExpandedIDs: 96e1faff82adfbffe06efcffe618fdff26abfdffe053feff6617ffff2afbffff62ca0000c0f90700fe1e080070640800
+      scrollPos: {x: 0, y: 28970.5}
+      m_SelectedIDs: 9af1f5ff
+      m_LastClickedID: -659046
+      m_ExpandedIDs: 8231f6ffa407f7ff94e1faff96e1faff82adfbffe06efcffe618fdff26abfdffe053feff6617ffff2afbffff62ca0000c0f90700fe1e080070640800
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -539,9 +539,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -219.25185, y: -1103.8032, z: -85.64374}
+    m_Target: {x: -6.8200493, y: -9.23006, z: -55.879646}
     speed: 2
-    m_Value: {x: -218.19876, y: -1099.9143, z: -85.71126}
+    m_Value: {x: -5.2710686, y: -7.913104, z: -55.900723}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -592,9 +592,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 99.16436
+    m_Target: 32.584793
     speed: 2
-    m_Value: 105.91654
+    m_Value: 34.692352
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -985,21 +985,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/The Retro Room Texture Pack/Cobble Stuff
+    - Assets/The Retro Room Texture Pack/Entrances
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/The Retro Room Texture Pack/Cobble Stuff
+  - Assets/The Retro Room Texture Pack/Entrances
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/samvi/Desktop/Projects/GameDev/TSA2026/hthstsa2026/TSA2026Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 510.5}
-    m_SelectedIDs: 9e4f0100
-    m_LastClickedID: 85918
+    scrollPos: {x: 0, y: 486.5}
+    m_SelectedIDs: 846b1c00
+    m_LastClickedID: 1862532
     m_ExpandedIDs: 000000002c4f01002e4f0100304f0100324f010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1053,8 +1053,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: a49c0a00
-    m_LastClickedInstanceID: 695460
+    m_SelectedInstanceIDs: 9af1f5ff
+    m_LastClickedInstanceID: -659046
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000e66f0000686a02005c970000304b04003aaf000050d00400a6a90a00aa5d0e00c2b208008c0e20009474000096ac0000e4a7000050b10000fae800005ae40000e87114008410010096420c00a4420c00d4790d0018780000fc0701000000000096820300
     m_RenameOverlay:
