@@ -11,7 +11,7 @@ public class TypewriterText : MonoBehaviour
     private TMP_Text textDisplay;
     private Coroutine typingCoroutine;
 
-    public bool isTyping { get; private set; }   // 🔹 ADD THIS
+    public bool isTyping { get; private set; }   
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class TypewriterText : MonoBehaviour
 
     IEnumerator TypeText(string fullText)
     {
-        isTyping = true;   // 🔹 START typing
+        isTyping = true; 
 
         textDisplay.text = "";
         yield return new WaitForSeconds(startDelay);
@@ -40,6 +40,6 @@ public class TypewriterText : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
 
-        isTyping = false;  // 🔹 DONE typing
+        isTyping = false;  
     }
 }

@@ -107,7 +107,7 @@ public class SceneLoadManager : MonoBehaviour
         audio.Stop();
         audio.clip = die;
         audio.loop = false;
-        // Play the new clip
+        
         audio.Play();
         yield return new WaitForSeconds(deathDelay);
         StartCoroutine(OutroCoroutine(false));
@@ -132,7 +132,7 @@ public class SceneLoadManager : MonoBehaviour
         audio.loop = false;
         yield return new WaitForSeconds(introVictDuration);
         audio.clip = song;
-        // Play the new clip
+        
         audio.Play();
         yield return new WaitForSeconds(victoryDuration);
         audio.Stop();

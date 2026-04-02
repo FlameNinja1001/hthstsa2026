@@ -564,12 +564,12 @@ MonoBehaviour:
 
 
     LEVEL
-    DESIGNER, 2D ARTIST, MUSCICIAN......AD
+    DESIGNER, 2D ARTIST, MUSICIAN.......AD
 
 
 
 
-    LEVEL DESIGNER, 2D ARTIST, MUSCICIAN......BD
+    LEVEL DESIGNER, 2D ARTIST, MUSICIAN.......BD
 
 
 
@@ -580,7 +580,7 @@ MonoBehaviour:
 
 
 
-    DOCUMENTER, MUSCICIAN.....................AO'
+    DOCUMENTER, MUSICIAN......................AO'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55a4a46796dd64328a60d01cfadb86dc, type: 2}
   m_sharedMaterial: {fileID: 1393264469656855004, guid: 55a4a46796dd64328a60d01cfadb86dc,

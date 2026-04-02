@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DialogueSceneManager : MonoBehaviour
 {
-    [Header("Dialogue Arrays (Fixed 6)")]
+    
     [TextArea] public string[] dialogueSet1;
     [TextArea] public string[] dialogueSet2;
     [TextArea] public string[] dialogueSet3;
@@ -14,13 +14,10 @@ public class DialogueSceneManager : MonoBehaviour
     [TextArea] public string[] dialogueSet6;
 
 
-    [Header("Objects Per Dialogue Set")]
-    public GameObject[] dialogueObjects; // Size should be 6
+    public GameObject[] dialogueObjects; 
 
-    [Header("Scene Names (1 per set)")]
-    public string[] loadStrings; // Should have 6 elements
+    public string[] loadStrings; 
 
-    [Header("UI Objects")]
     public RectTransform moveObject1;
     public RectTransform moveObject2;
     public Vector2 startPos1;
@@ -30,10 +27,8 @@ public class DialogueSceneManager : MonoBehaviour
     public Vector2 exitPos1;
     public Vector2 exitPos2;
 
-    [Header("Timing")]
     public float moveDuration = 1f;
 
-    [Header("References")]
     public TypewriterText typewriter;
 
     private PlayerInputActions input;
@@ -48,7 +43,7 @@ public class DialogueSceneManager : MonoBehaviour
     {
         if (dialogueObjects == null || dialogueObjects.Length == 0) return;
 
-        // Clamp index so it NEVER goes out of bounds
+        
         int safeIndex = Mathf.Clamp(currentDialogueIndex, 0, dialogueObjects.Length - 1);
 
         for (int i = 0; i < dialogueObjects.Length; i++)
@@ -61,7 +56,7 @@ public class DialogueSceneManager : MonoBehaviour
     {
         input = new PlayerInputActions();
 
-        // Combine the 6 arrays into a 2D array for easy indexing
+        
         allDialogues = new string[6][]
         {
             dialogueSet1,
@@ -81,7 +76,7 @@ public class DialogueSceneManager : MonoBehaviour
 
     void Start()
     {
-        UpdateDialogueObjects(); // <-- ADD THIS
+        UpdateDialogueObjects(); 
         StartCoroutine(StartCutscene());
         SceneLoadManager.lives = 3;
         SceneLoadManager.checkpointSpawn = 0;
@@ -104,7 +99,7 @@ public class DialogueSceneManager : MonoBehaviour
 
     IEnumerator StartCutscene()
     {
-        // Move both objects up at once
+        
         yield return StartCoroutine(MoveBothObjects(startPos1, startPos2, moveUpPos1, moveUpPos2, moveDuration));
 
         currentLineIndex = 0;
@@ -140,20 +135,16 @@ public class DialogueSceneManager : MonoBehaviour
 
     IEnumerator EndCutscene()
     {
-        // Move both objects offscreen at once
+       
         yield return StartCoroutine(MoveBothObjects(moveUpPos1, moveUpPos2, exitPos1, exitPos2, moveDuration));
 
-        // Load next scene
+       
         if (currentDialogueIndex < loadStrings.Length)
         {
             string nextScene = loadStrings[currentDialogueIndex];
             currentDialogueIndex++;
             SceneManager.LoadScene(nextScene);
-        }
-        else
-        {
-            Debug.LogWarning("No scene defined for this dialogue index!");
-        }
+        }       
     }
 
     IEnumerator MoveBothObjects(Vector2 from1, Vector2 from2, Vector2 to1, Vector2 to2, float duration)

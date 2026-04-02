@@ -30,8 +30,7 @@ public class ControlScript : MonoBehaviour
 
     public bool canDoubleJump = false;
     public bool hasDoubleJumped = false;
-
-    // Wall jump + double jump tracking
+    
     public bool hasUsedWallJumpDouble = false;
 
     public bool isRaycastHittingWall = false;
@@ -42,8 +41,7 @@ public class ControlScript : MonoBehaviour
     public float wallJumpDuration = 1f;
     public bool isWallJumping = false;
     public bool canWallJump = false;
-
-    // Track jump release to prevent auto-double jump
+    
     public bool jumpReleased = true;
     public bool animBool;
     public float doubleJumpAnim = 0.5f;
@@ -115,8 +113,7 @@ public class ControlScript : MonoBehaviour
         
         if (playerHealth.canPlayerMove && tmPlayerMove)
         {            
-                    
-            // Read input
+                                
             jump = input.Player.Jump.IsPressed();
             move = input.Player.Move.ReadValue<Vector2>();
             dash = input.Player.Dash.IsPressed();
@@ -125,8 +122,7 @@ public class ControlScript : MonoBehaviour
             {
                 hasAirDashed = false;
             }
-
-            // Track jump release
+        
             if (!jump)
                 jumpReleased = true;
 
@@ -152,15 +148,14 @@ public class ControlScript : MonoBehaviour
             {
                 gravity = normalGravity;
             }
-
-            // Double jump logic (requires jumpReleased)
+           
             if (canDoubleJump && jump && jumpReleased && !hasDoubleJumped && !isWallJumping)
             {
                 StartCoroutine(AnimBoolRoutine());
                 rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
                 hasDoubleJumped = true;
                 hasUsedWallJumpDouble = true;
-                jumpReleased = false; // must release to jump again
+                jumpReleased = false; 
             }
 
             if (move.x > 0)
@@ -212,7 +207,7 @@ public class ControlScript : MonoBehaviour
                     canDoubleJump = false;
                     hasDoubleJumped = false;
 
-                    // Reset everything on ground
+
                     hasUsedWallJumpDouble = false;
                     jumpReleased = true;
                 }
@@ -283,12 +278,12 @@ public class ControlScript : MonoBehaviour
 
         int initialMoveDir = moveDirection;
 
-        // ⭐ Reset jumpReleased to require release after wall jump
+       
         jumpReleased = false;
 
         rb.velocity = new Vector3(wallJumpPushHoriz * -initialMoveDir, wallJumpPushVertical, rb.velocity.z);
 
-        // Only allow double jump ONCE until grounded
+        
         if (!hasUsedWallJumpDouble)
         {
             canDoubleJump = true;

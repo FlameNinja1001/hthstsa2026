@@ -148,11 +148,11 @@ public class GilgameshBossScript : MonoBehaviour
 
         float time = 0f;
 
-        // Center point used for Slerp arc
+        
         Vector3 center = (startPos + endPos) / 2f;
-        center.y -= jumpHeight; // Push center down to make arc upward
+        center.y -= jumpHeight; 
 
-        // Offset positions relative to center
+        
         Vector3 startRel = startPos - center;
         Vector3 endRel = endPos - center;
 
@@ -160,7 +160,7 @@ public class GilgameshBossScript : MonoBehaviour
         {
             float t = time / jumpDuration;
 
-            // Slerp relative positions
+            
             Vector3 relPos = Vector3.Slerp(startRel, endRel, t);
 
             transform.position = center + relPos;

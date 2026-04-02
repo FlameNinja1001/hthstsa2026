@@ -636,8 +636,8 @@ MonoBehaviour:
   - "NED opened his eyes, and looked around\u2026he was in ANCIENT MESOPOTAMIA!\n\n"
   - Help NED get back to the present day!
   dialogueSet3:
-  - After taking on GILGAMESH, NED felt exhausted. On the ground, he picked up new
-    weapons! (press ENTER)
+  - After GILGAMESH surrendered, NED felt exhausted. On the ground, he picked up
+    new items! (press ENTER)
   - 'His BAT was replaced with a MACE (press X to use), and his SLINGSHOT a JAVELIN
     (press Z to use).
 
@@ -645,8 +645,8 @@ MonoBehaviour:
   - "NED now woke up in the DARK AGES, and felt like his time period was \u201Cin
     another castle!\u201D"
   dialogueSet4:
-  - After defeating LANCELOT, NED spotted some new loot. Excited, he ran towards
-    it and obtained it. (press ENTER)
+  - After LANCELOT surrendered, NED spotted some new tools. Excited, he ran towards
+    them and obtained them. (press ENTER)
   - 'His MACE was replaced with a SWORD (press X to use), and his JAVELIN a CROSSBOW
     (press Z to use).
 
@@ -654,11 +654,9 @@ MonoBehaviour:
   - 'NED was moved through time again and found himself in COLONIAL AMERICA. He felt
     like he was almost back to the present! '
   dialogueSet5:
-  - KING GEORGE & GEORGE WASHINGTON surrendered and gave their weapons to NED. (press
+  - KING GEORGE & GEORGE WASHINGTON surrendered and gave their items to NED. (press
     ENTER)
-  - '
-
-    His SWORD was replaced with a MUSKET BLADE (press X to use), and his CROSSBOW
+  - 'His SWORD was replaced with a MUSKET BLADE (press X to use), and his CROSSBOW
     a MUSKET BULLET (press Z to use).
 
 '
