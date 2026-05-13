@@ -36,7 +36,14 @@ public class HealthDrop : MonoBehaviour
             PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
             if (playerHealth.health < playerHealth.healthMax)
             {
-                playerHealth.health += 1;
+                if (playerHealth.health == playerHealth.healthMax - 1)
+                {
+                    playerHealth.health += 1;
+                }
+                else
+                {
+                    playerHealth.health += 2;
+                }
             }
             Destroy(gameObject);
         }

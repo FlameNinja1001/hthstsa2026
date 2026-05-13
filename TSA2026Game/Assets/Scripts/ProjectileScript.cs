@@ -38,7 +38,10 @@ public class ProjectileScript : MonoBehaviour
     public float offset;
     public ControlScript controlScript;
     private Coroutine shootCoroutine;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public float shotDelay = 0.25f;       // ADD: customizable delay between shots
+    private float lastShotTime = -999f;  // ADD: tracks when last shot was fired
+
     void Awake()
     {
         input = new PlayerInputActions();
@@ -61,7 +64,6 @@ public class ProjectileScript : MonoBehaviour
         controlScript = GetComponent<ControlScript>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ammoCountDisplay = currentShots;
@@ -79,13 +81,13 @@ public class ProjectileScript : MonoBehaviour
             canShoot = true;
         }
 
-        if (canShoot && shootButton && currentShots < ammoCount && !meleeScript.isSlashing && !controlScript.isDashing)
+        if (canShoot && shootButton && currentShots < ammoCount && !meleeScript.isSlashing && !controlScript.isDashing && Time.time - lastShotTime >= shotDelay)
         {
             currentShots += 1;
+            lastShotTime = Time.time;  // ADD: record shot time
             GameObject bullet = Instantiate(activeWeapon, new Vector3(transform.position.x + (currentDistance * moveDirection), transform.position.y + offset, transform.position.z), activeWeapon.transform.rotation);
             bullet.transform.localScale = new Vector3(bullet.transform.localScale.x * moveDirection, bullet.transform.localScale.y, bullet.transform.localScale.z);
 
-            // Stop the previous coroutine if any, to retrigger the animation
             if (shootCoroutine != null)
             {
                 StopCoroutine(shootCoroutine);
@@ -148,13 +150,12 @@ public class ProjectileScript : MonoBehaviour
     {
         if (activeWeaponString == "Javelin" || activeWeaponString == "Slingshot")
         {
-            // If already true, restart it
             isShootAnimBoolActive = false;
-            yield return null; // wait one frame so Animator registers the reset
+            yield return null;
             isShootAnimBoolActive = true;
 
             float timer = 0f;
-            float animDuration = 0.3f; // <-- set to your shooting animation length
+            float animDuration = 0.3f;
 
             while (timer < animDuration)
             {
@@ -172,7 +173,6 @@ public class ProjectileScript : MonoBehaviour
 
             while (timer < 1f)
             {
-                // Break immediately if melee button pressed
                 if (meleeScript.meleeButton)
                 {
                     meleeScript.StartSlashFromElsewhere();
@@ -180,7 +180,7 @@ public class ProjectileScript : MonoBehaviour
                 }
 
                 timer += Time.deltaTime;
-                yield return null; // wait one frame
+                yield return null;
             }
 
             isShootAnimBoolActive = false;
