@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleScreenScript : MonoBehaviour
 {
+    public static bool isHard = false;
+    public static bool hasChosen = false;
+    public bool isHardVisual;
     [Header("Fade Panel")]
     public Image fadePanel;            // UI Panel Image
     public float fadeDuration = 1f;
@@ -27,9 +30,12 @@ public class TitleScreenScript : MonoBehaviour
     private bool waitingForInput = false;
     private bool inputReleased = true;
     private Coroutine flashCoroutine;
+    public GameObject text2;
 
     void Start()
     {
+        isHard = false;
+        hasChosen = false;
         DialogueSceneManager.currentDialogueIndex = 0;
         SceneLoadManager.lives = 3;
         SceneLoadManager.checkpointSpawn = 0;
@@ -56,6 +62,7 @@ public class TitleScreenScript : MonoBehaviour
 
     void Update()
     {
+        isHardVisual = isHard;
         if (!waitingForInput) return;
 
         if (!inputReleased && !input.Player.Start.IsPressed())
@@ -112,6 +119,7 @@ public class TitleScreenScript : MonoBehaviour
 
     IEnumerator FlashObject()
     {
+        text2.SetActive(true);
         while (true)
         {
             flashObject.SetActive(!flashObject.activeSelf);
@@ -137,6 +145,7 @@ public class TitleScreenScript : MonoBehaviour
 
     IEnumerator FadeInAndLoadScene()
     {
+        hasChosen = true;
         // Fade panel from 0 -> 1
         yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
 

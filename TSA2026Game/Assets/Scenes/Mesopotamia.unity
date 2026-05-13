@@ -1527,7 +1527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &14032603
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4866,7 +4866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &56404841
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13994,7 +13994,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 415.40002, y: 395.00003}
+  m_AnchoredPosition: {x: 415.40002, y: 385}
   m_SizeDelta: {x: 100, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &179080136
@@ -37103,7 +37103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &493268778
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -51922,7 +51922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &685892361
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -86357,7 +86357,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 417.4, y: 397}
+  m_AnchoredPosition: {x: 417.4, y: 385}
   m_SizeDelta: {x: 100, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146428400
@@ -87169,7 +87169,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36.9, y: -29.8}
+  m_AnchoredPosition: {x: -33.6, y: -26.1}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1156641928
@@ -129075,7 +129075,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1739200180
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141216,7 +141216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317.09998, y: 395.8}
+  m_AnchoredPosition: {x: 317.09998, y: 385}
   m_SizeDelta: {x: 100, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896219438
@@ -141903,7 +141903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 317, y: 397}
+  m_AnchoredPosition: {x: 317, y: 385}
   m_SizeDelta: {x: 100, y: 98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1905149039
@@ -161577,7 +161577,7 @@ PrefabInstance:
     - target: {fileID: 7884513590947811401, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
         type: 3}
       propertyPath: delayForShots3
-      value: 4
+      value: 5.5
       objectReference: {fileID: 0}
     - target: {fileID: 7884513590947811401, guid: 52aa081c0cbe94a3ea8dd6f9c0d2084e,
         type: 3}
